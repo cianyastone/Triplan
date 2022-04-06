@@ -1,17 +1,17 @@
 import React from "react";
-import { FlatList, View, Text } from "native-base";
+import { FlatList, Box, Text } from "native-base";
 import Trip from "./Trip";
 
 const TripList = ({ list }) => {
 const renderItem = ({ item }) => <Trip trip={item}/>;
   return (
-    <View>
+    <Box>
       <FlatList
         data={list}
         renderItem={renderItem}
         keyExtractor={item => item.title}
       />
-    </View>
+    </Box>
   );
 }
 export default TripList;

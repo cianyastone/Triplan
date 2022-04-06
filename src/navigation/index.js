@@ -5,9 +5,11 @@ import { Image, KeyboardAvoidingView } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from "../screens/Home";
-import Login from '../screens/Login';
+import Home from "../screens/HomeScreen";
+import Login from '../screens/LoginScreen';
 import TripPlanScreen from '../screens/TripPlanScreen';
+import Setting from "../screens/SettingScreen";
+import Search from '../screens/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,7 +44,7 @@ const MyTabs = () => {
       }}>
       <Tab.Screen 
         name="HomeStack" 
-        component={Home} 
+        component={HomeStack}
         options={{
           tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
@@ -64,7 +66,7 @@ const MyTabs = () => {
       />
       <Tab.Screen 
         name="SearchStack" 
-        component={Home} 
+        component={Search} 
         options={{
           tabBarLabel:() => {return null},
           tabBarIcon: ({ focused }) => (
@@ -75,6 +77,30 @@ const MyTabs = () => {
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name=" " 
+        component={Home} 
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name="Setting" 
+        component={Setting} 
+        options={{
+          title: '設定',
+          headerTitleStyle: {
+            fontSize: 20
+          },
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 

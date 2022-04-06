@@ -25,11 +25,11 @@ const Login = () => {
                     <Button mb={130} width={129} borderRadius="100"
                         onPress={() => dispatch(login())}
                     >
-                        <Text>登入</Text>
+                        <Text fontSize="md">登入</Text>
                     </Button>
                     <Divider/>
                     <Button mt={5} width={129} borderRadius="100">
-                        <Text>建立新帳號</Text>
+                        <Text fontSize="md">建立新帳號</Text>
                     </Button>
                 </Center>
             </VStack>

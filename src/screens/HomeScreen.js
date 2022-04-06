@@ -3,10 +3,8 @@ import { useDispatch } from "react-redux";
 import { ScrollView, Text, Heading, Box, Image, Flex, Pressable } from 'native-base';
 import tripData from "../json/trip.json";
 import TripList from "../components/TripList";
-import { logout } from "../redux/actions/accountActions";
 
-const Home = () => {
-  const dispatch = useDispatch();
+const Home = ({ navigation }) => {
   return (
     <Box flex="1">
       <Flex direction="row" alignItems="center" p="2" justifyContent="space-between" bg="#c8c8c8">
@@ -17,7 +15,7 @@ const Home = () => {
             <Text>規劃了{tripData.TripList.length}個行程</Text>
           </Box>
         </Flex>
-        <Pressable onPress={() => dispatch(logout())}>
+        <Pressable onPress={() => navigation.navigate('Setting')}>
           <Image source={require('../asset/setting.png')}/>
         </Pressable>
       </Flex>
