@@ -1,0 +1,20 @@
+{
+    "TripList":[
+        {
+            "title": "跨年",
+            "days": 3,
+            "year": 2022,
+            "month": 12,
+            "day": 30,
+            "image":"https://i.pinimg.com/564x/cc/1e/63/cc1e6373b8513d776fa28e7f3e58fd14.jpg"
+        },
+        {
+            "title": "暑假第一遊",
+            "days": 4,
+            "year": 2022,
+            "month": 6,
+            "day": 28,
+            "image":"https://i.pinimg.com/564x/cc/1e/63/cc1e6373b8513d776fa28e7f3e58fd14.jpg"
+        }
+    ]
+}

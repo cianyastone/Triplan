@@ -1,56 +1,23 @@
-import React from 'react';
-// import { View, FlatList } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import Navigation from './src/navigation';
+import { NativeBaseProvider } from 'native-base';
+import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
 
-import TripPlanScreen from './src/screens/TripPlanScreen';
+import { store, persistor } from './src/redux/store';
 
-  const Stack = createStackNavigator();
-  const Tab = createBottomTabNavigator();
-  
-  const TripStack = () => {
-    return (
-        <Stack.Navigator>
-          <Stack.Screen 
-            name="Trip" 
-            component={TripPlanScreen} 
-            options={{
-              title: '行程標題',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-                fontSize: 20
-              }, 
-            }}
-          />
-        </Stack.Navigator>
-    );
-  }
-  
-  
-  const App = () => {
-    return (
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen 
-            name="行程標題" 
-            component={TripStack} 
-            options={{
-              headerShown: false,
-            }}
-            />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
-  }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-export default App;
+export default function App() {
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <SafeAreaProvider>
+          <SafeAreaView style={{flex: 1}} >
+            <NativeBaseProvider>
+              <Navigation />
+            </NativeBaseProvider>
+          </SafeAreaView> 
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
+  );
+}
