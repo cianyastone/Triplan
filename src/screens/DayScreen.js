@@ -1,53 +1,76 @@
 import React from "react";
-import { ScrollView, Linking } from 'react-native';
+import { ScrollView, Linking, View, Image } from 'react-native';
 import { Button, Card, Text, PricingCard, Tile } from 'react-native-elements';
 
-
-const DayScreen = ({ route }) => {
-  const { title, 
-          artist,
-          price,
-          url,
-          image,
-          description
-        } = route.params;
-
-  return (
-    <ScrollView>
-
-    <Tile
-      imageSrc={{ uri: image }}
-      featured
-      title={title.toUpperCase()}
-      caption={artist.toUpperCase()}
-    />
-
-    <PricingCard
-        color='#4f9deb'
-        title='Discount Now!'
-        price={`Price: $${price}`}
-        info={['1 User', 'Basic Support', 'All Core Features']}
-        button={{ title: 'BUY NOW!', icon: 'add-shopping-cart' }}
-        onButtonPress={() => Linking.openURL(url)}
-    />
-
-    <Card>
-      <Text>Artist: {artist}</Text>
-      <Text style={{ marginBottom: 10 }}>Title: {title}</Text>
-      <Text style={{fontWeight: 'bold'}}>Descriptions:</Text>
-      <Text style={{ marginBottom: 10 }}>
-        {description}          
-      </Text>
-      <Button
-        raised
-        icon={{ name: 'add-shopping-cart' }}
-        backgroundColor='#03A9F4'
-        title='BUY NOW!'
-        onPress={() => Linking.openURL(url)}
-      />
-    </Card>
-
-  </ScrollView>
+const DayScreen = () => {
+  return(
+    <View style={{flex: 1}}>
+      <View style={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+        <Image 
+        source={require('../../assets/splash.png')}
+        style={{
+          height: 225,
+          width: 330,
+        }}
+        />
+      </View>
+      <View style={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}>
+      <Card
+        containerStyle={{
+          borderRadius: 20,
+          height: 80,
+          width: 330,
+          // justifyContent: "center",
+        }}
+      >
+        <View
+        style={{
+          marginLeft: 25,
+          flexDirection: "row",
+          justifyContent: "flex-start",
+        }}>
+          <View style={{
+            flexDirection: "column",
+            alignItems: "center",}}
+          >
+            <Text style={{fontSize:12}}>時間</Text>
+            <View style={{
+              borderColor: 'black',
+              borderBottomWidth: 15,
+              width: 1,
+              }} 
+            />
+            <Text style={{fontSize:12}}>時間</Text>
+          </View>
+          <View style={{
+            justifyContent: "center",
+            marginLeft:25,}}>
+            <View style={{
+              height: 18,
+              width: 18,
+              borderRadius: 9,
+              backgroundColor: "gray"
+              }} />
+          </View>
+          <View style={{
+            flexDirection: "column",
+            justifyContent: "center",
+            marginLeft:25,}}>
+            <Text style={{fontSize:14}}>第一個行程</Text>
+            <Text style={{fontSize:12,marginTop:5,}}>地址</Text>
+          </View>
+        </View>
+        
+      </Card>
+      
+      </View>
+    </View>
   );
 }
 

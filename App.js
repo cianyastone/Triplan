@@ -5,8 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import TripPlanScreen from './src/screens/TripPlanScreen';
-import SettingsScreen from './src/screens/SettingsScreen';
-import albumData from "./src/json/albums.json";
 
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -18,9 +16,9 @@ import albumData from "./src/json/albums.json";
             name="Trip" 
             component={TripPlanScreen} 
             options={{
-              title: albumData.albumTitle,
+              title: '行程標題',
               headerTitleStyle: {
-                fontWeight: '400',
+                fontWeight: 'bold',
                 fontSize: 20
               }, 
             }}
@@ -41,7 +39,6 @@ import albumData from "./src/json/albums.json";
               headerShown: false,
             }}
             />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     );
