@@ -1,18 +1,19 @@
 import React from "react";
 import { FlatList, Box, Text } from "native-base";
-import Trip from "./Trip";
+import UnfinishedTrip from "./UnfinishedTrip";
 
-const TripList = ({ list }) => {
-const renderItem = ({ item }) => <Trip trip={item}/>;
+const UnfinishedTripList = ({ list }) => {
+const renderItem = ({ item }) => <UnfinishedTrip trip={item}/>;
   return (
     <Box>
       <FlatList
         data={list}
         renderItem={renderItem}
+        horizontal={true}
         keyExtractor={item => item.title}
       />
     </Box>
   );
 }
-export default TripList;
+export default UnfinishedTripList;
 

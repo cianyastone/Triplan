@@ -1,4 +1,4 @@
-import { Box, FormControl, useColorMode, VStack, Text, Input, Button, Divider, Center, Image } from 'native-base';
+import { Box, FormControl, Heading, useColorMode, VStack, Text, Input, Button, Divider, Center, Image, Pressable } from 'native-base';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/actions";
 
@@ -10,30 +10,61 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <Box mt={100}>
-            <Center mb={10}>
+        <Box bg="#fff" flex={1}>
+            <Center mt={100} mb={10}>
                 <Image size={125} source={{uri: "https://i.pinimg.com/564x/cc/1e/63/cc1e6373b8513d776fa28e7f3e58fd14.jpg"}}/>
             </Center>
-            <VStack width="70%" alignSelf="center">
-                <FormControl mb={5} isRequired>
-                    <Input _focus={focusInputStyle} placeholder="請輸入電子信箱" variant="rounded"/>
+            <VStack alignItems="center">
+                <FormControl mb={15} isRequired h={69} justifyContent="center" alignItems="center">
+                    <Box bg="#fff" mr={230} h={25} w={55} zIndex={1} alignItems="center">
+                        <Text>Email</Text>
+                    </Box>
+                    <Box h={44} w={310} 
+                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#2AB3C0"
+                    />
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#fff"
+                    />
+                    <Input position='absolute' w={310} _focus={focusInputStyle} placeholder="請輸入電子信箱" variant="unstyled"/>
                 </FormControl>
-                <FormControl mb={5} isRequired>
-                    <Input type="password" _focus={focusInputStyle} placeholder="請輸入密碼" variant="rounded"/>
+                <FormControl mb={15} isRequired h={69} justifyContent="center" alignItems="center">
+                    <Box bg="#fff" mr={200} h={25} w={86} zIndex={1} alignItems="center">
+                        <Text>Password</Text>
+                    </Box>
+                    <Box h={44} w={310} 
+                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#2AB3C0"
+                    />
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#fff"
+                    />
+                    <Input type="password" position='absolute' w={310} _focus={focusInputStyle} placeholder="請輸入密碼" variant="unstyled"/>
                 </FormControl>
-                <Center>
-                    <Button mb={130} width={129} borderRadius="100"
-                        onPress={() => dispatch(login())}
-                    >
-                        <Text fontSize="md">登入</Text>
-                    </Button>
-                    <Divider/>
-                    <Button mt={5} width={129} borderRadius="100"
-                        onPress={() => navigation.navigate('Register')}
-                    >
-                        <Text fontSize="md">建立新帳號</Text>
-                    </Button>
-                </Center>
+                <Pressable alignItems="center" onPress={() => dispatch(login())}>
+                    <Box mt={2} h={55} w={310} 
+                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#2AB3C0"
+                    />
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#F9BC75"
+                    />
+                    <Heading position='absolute' mt={4} color="#fff" fontSize="md">登入</Heading>
+                </Pressable>
+                <Pressable alignItems="center" onPress={() => navigation.navigate('Register')}>
+                    <Box mt={2} h={55} w={310} 
+                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#2AB3C0"
+                    />
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#A8DEE0"
+                    />
+                    <Heading position='absolute' mt={4} color="#fff" fontSize="md">點此註冊</Heading>
+                </Pressable>
             </VStack>
         </Box>
     );

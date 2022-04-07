@@ -1,26 +1,73 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { ScrollView, Text, Heading, Box, Image, Flex, Pressable } from 'native-base';
+import { ActionSheet } from 'react-native-cross-actionsheet';
 import tripData from "../json/trip.json";
-import TripList from "../components/TripList";
+import UnfinishedTripList from "../components/UnfinishedTripList";
+import FinishedTripList from "../components/FinishedTripList";
+import moment from "moment";
 
 const Home = ({ navigation }) => {
+  const onPress = () =>
+    ActionSheet.showActionSheetWithOptions(
+    {
+      options: ["取消", "分享", "刪除"],
+      destructiveButtonIndex: 2,
+      cancelButtonIndex: 0,
+      userInterfaceStyle: 'dark',
+    },
+    buttonIndex => {
+      if (buttonIndex === 0) {
+      } else if (buttonIndex === 1) {
+      } else if (buttonIndex === 2) {
+      }
+    }
+  );
   return (
-    <Box flex="1">
-      <Flex direction="row" alignItems="center" p="2" justifyContent="space-between" bg="#c8c8c8">
+    <Box flex="1" alignSelf="center" bg="#fff" px={4}>
+      <Flex direction="row" alignItems="center" py={2} justifyContent="space-between">
         <Flex direction="row" alignItems="center">
-          <Image borderRadius={100} size="xs" source={require('../asset/setting.png')}/>
-          <Box pl="3">
-            <Heading size="md">Name</Heading>
-            <Text>規劃了{tripData.TripList.length}個行程</Text>
-          </Box>
+          <Image borderRadius={100} size="50" source={require('../asset/userPhoto.png')}/>
+          <Text fontSize="xl" ml={2}>Name</Text>
         </Flex>
         <Pressable onPress={() => navigation.navigate('Setting')}>
-          <Image source={require('../asset/setting.png')}/>
+          <Image size={30} source={require('../asset/setting.png')}/>
         </Pressable>
       </Flex>
-      <ScrollView bg="#c8c8c8">
-        <TripList list={tripData.TripList}/>
+
+      <ScrollView>
+        <Text fontSize="sm" m={3}>即將進行的行程</Text>
+        <Box h={220} alignItems="center" mb={30}>
+          <Box mt={2} h={210} w={320}
+            borderRadius="25" borderWidth="1.5" borderColor="#1D1D1D"
+            bg="#F9BC75"
+          />
+          <Flex position="absolute" bg="#fff" w="100%" h={210} justifyContent="center"
+            borderRadius={20} borderWidth="1.5" borderColor="#1D1D1D"
+          >
+            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} source={{uri: tripData.TripList[1].image}}/>
+            <Box position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} bg="rgba(29, 29, 29, 0.4)"/>
+            <Flex h="100%" w="100%" p={5}
+              direction="row" justifyContent="space-between"
+            >
+              <Box mt={90}>
+                <Heading color="#fff" size="lg">{tripData.TripList[1].title}</Heading>
+                <Text color="#fff" fontSize="md">{moment(tripData.TripList[1].date).format("DD")}, {moment(tripData.TripList[1].date).format("MMM")}</Text> 
+                <Text color="#fff" fontSize="md">{tripData.TripList[1].days}天{tripData.TripList[1].days-1}夜</Text>
+              </Box>
+              <Pressable onPress={onPress}>
+                <Box borderRadius="full" borderWidth={2} borderColor="#fff"
+                  justifyContent="center" size={25} p={1}
+                >
+                  <Image size={17} source={require('../asset/more_light.png')}/>
+                </Box>
+              </Pressable>
+            </Flex>
+          </Flex>
+        </Box>
+        <Text fontSize="sm" m={3}>未完成的行程</Text>
+        <UnfinishedTripList list={tripData.TripList}/>
+        <Text fontSize="sm" m={3}>已完成的行程</Text>
+        <FinishedTripList list={tripData.TripList}/>
       </ScrollView>
     </Box>
   );

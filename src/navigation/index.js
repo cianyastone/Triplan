@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { useSelector } from "react-redux";
-import { Image, KeyboardAvoidingView } from 'native-base';
+import { Image, KeyboardAvoidingView, Pressable, Box } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -85,7 +85,7 @@ const MyTabs = () => {
   );
 }
 
-const HomeStack = () => {
+const HomeStack = ({ navigation: { goBack }}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -101,8 +101,17 @@ const HomeStack = () => {
         options={{
           title: '設定',
           headerTitleStyle: {
-            fontSize: 20
+            fontSize: 16,
           },
+          headerLeft: () => (
+            <Pressable ml={6}onPress={() => goBack()}>
+              <Box size={38} bg="#F9BC75" justifyContent="center" alignContent="center"
+                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+              >
+                <Image size={30} source={require('../asset/back.png')}/>
+              </Box>
+            </Pressable>
+          ),
         }}
       />
     </Stack.Navigator>
