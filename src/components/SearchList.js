@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FlatList, Box, Input, Text } from "native-base";
-import Trip from "./Trip";
+import SearchTrip from "./SearchTrip";
 import tripData from '../json/trip.json';
 
 class SearchFunction extends Component {
@@ -13,6 +13,7 @@ class SearchFunction extends Component {
         };
         
         this.tripData = tripData.TripList;
+        this.state.data = this.tripData;
     }
 
     renderSeparator = () => {
@@ -33,6 +34,8 @@ class SearchFunction extends Component {
             const textData = text.toUpperCase();
         if(text.length >0 ){
             return itemData.indexOf(textData) > -1;
+        }else{
+            newData = this.tripData;
         }
         });
         this.setState({
@@ -42,7 +45,7 @@ class SearchFunction extends Component {
     };
 
     render() {
-        const renderItem = ({ item }) => <Trip trip={item}/>;
+        const renderItem = ({ item }) => <SearchTrip trip={item}/>;
         return (
             <Box>
                 <Box width="80%" alignSelf="center" my={4}>

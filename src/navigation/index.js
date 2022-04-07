@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from "../screens/HomeScreen";
 import Login from '../screens/LoginScreen';
+import Register from '../screens/RegisterSceen';
 import TripPlanScreen from '../screens/TripPlanScreen';
 import Setting from "../screens/SettingScreen";
 import Search from '../screens/SearchScreen';
@@ -25,7 +26,11 @@ const Navigation = () => {
       >
         {
           !login.hasLogin
-          ? (<Login />)
+          ? (
+            <NavigationContainer>
+              <UserStack />
+            </NavigationContainer>  
+          )
           : (
             <NavigationContainer>
               <MyTabs />
@@ -136,5 +141,25 @@ const TripTab = () => {
   );
 }
 
+const UserStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Login" 
+        component={Login} 
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen 
+        name="Register" 
+        component={Register} 
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default Navigation;

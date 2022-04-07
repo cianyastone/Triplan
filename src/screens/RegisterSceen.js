@@ -2,7 +2,7 @@ import { Box, FormControl, useColorMode, VStack, Text, Input, Button, Divider, C
 import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/actions";
 
-const Login = ({ navigation }) => {
+const RegisterSceen = ({ navigation, navigation: { goBack } }) => {
     const dispatch = useDispatch();
     const { colorMode } = useColorMode();
     const focusInputStyle = {
@@ -16,22 +16,24 @@ const Login = ({ navigation }) => {
             </Center>
             <VStack width="70%" alignSelf="center">
                 <FormControl mb={5} isRequired>
+                    <Input _focus={focusInputStyle} placeholder="請輸入姓名" variant="rounded"/>
+                </FormControl>
+                <FormControl mb={5} isRequired>
                     <Input _focus={focusInputStyle} placeholder="請輸入電子信箱" variant="rounded"/>
                 </FormControl>
                 <FormControl mb={5} isRequired>
                     <Input type="password" _focus={focusInputStyle} placeholder="請輸入密碼" variant="rounded"/>
                 </FormControl>
                 <Center>
-                    <Button mb={130} width={129} borderRadius="100"
-                        onPress={() => dispatch(login())}
-                    >
-                        <Text fontSize="md">登入</Text>
+                    <Button mb={130} width={129} borderRadius="100">
+                        <Text fontSize="md">註冊</Text>
                     </Button>
                     <Divider/>
-                    <Button mt={5} width={129} borderRadius="100"
-                        onPress={() => navigation.navigate('Register')}
+                    <Button 
+                        mt={5} width={129} borderRadius="100"
+                        onPress={() => goBack()}
                     >
-                        <Text fontSize="md">建立新帳號</Text>
+                        <Text fontSize="md">點此登入</Text>
                     </Button>
                 </Center>
             </VStack>
@@ -39,4 +41,4 @@ const Login = ({ navigation }) => {
     );
 }
 
-export default Login;
+export default RegisterSceen;
