@@ -46,16 +46,23 @@ class SearchFunction extends Component {
 
     render() {
         const renderItem = ({ item }) => <SearchTrip trip={item}/>;
+        const black="#1D1D1D";
+        const blue="#2AB3C0";
+        const orange="#F9BC75";
+        const white="#fff";
+        const green="#7EBB94";
+        const darkBlack="#262626";
         return (
             <Box flex={1}>
-                <Box my={5} justifyContent="center" alignItems="center">
-                    <Box h={50} w={300} mt={3}
-                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
-                        bg="#F9BC75" alignSelf="center"
+                <Box my={5} justifyContent="center" >
+                    <Box h={55} w={300} mt={3}
+                        borderRadius="20" borderWidth="1.5" 
+                        alignSelf="center" justifyContent="center"
+                        _light={{ bg: orange, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
                     />
-                    <Box position='absolute' h={50} w={320} 
-                        borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
-                        bg="#fff"
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="30" borderWidth="1.5"
+                        _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
                     />
                     <Input position='absolute' w={300} onChangeText={text => this.searchItems(text)} placeholder="在這裡搜尋" variant="unstyled"/>
                 </Box>

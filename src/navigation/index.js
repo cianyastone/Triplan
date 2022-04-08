@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { useSelector } from "react-redux";
-import { Image, KeyboardAvoidingView, Pressable, Box, Flex } from 'native-base';
+import { Image, KeyboardAvoidingView, Pressable, Box, Flex, useColorMode } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,6 +14,13 @@ import Search from '../screens/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const black="#1D1D1D";
+const blueGreen="#2AB3C0";
+const blue = "#A8DEE0";
+const orange="#F9BC75";
+const white="#fff";
+const green="#7EBB94";
+const darkBlack="#262626";
 
 const Navigation = () => {
   const { login } = useSelector((state) => state.account);
@@ -53,8 +60,8 @@ const MyTabs = () => {
   );
 }
 
-const HomeStack = ({ navigation: { goBack }, navigation }) => {
-  // navigation.setOptions({ tabBarStyle:{ display:'none' }});
+const HomeStack = ({ navigation: { goBack } }) => {
+  const { colorMode } = useColorMode();
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -72,15 +79,21 @@ const HomeStack = ({ navigation: { goBack }, navigation }) => {
           headerTitleStyle: {
             fontSize: 16,
           },
+          headerTintColor: colorMode == 'light' ? black : white,
           headerLeft: () => (
             <Pressable ml={6}onPress={() => goBack()}>
               <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
-                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+                borderRadius={15} borderWidth={2} 
+                _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
               >
                 <Image size={28} source={require('../asset/back.png')}/>
               </Box>
             </Pressable>
           ),
+          headerStyle: {
+            backgroundColor: colorMode == 'light' ? white : darkBlack,
+          },
+          headerShadowVisible: false,
         }}
       />
     </Stack.Navigator>
@@ -142,14 +155,16 @@ const UserStack = () => {
 
 function MyTabBar({ state, descriptors, navigation }) {
   return (
-    <Box>
+    <Box _light={{ bg: white }} _dark={{ bg: darkBlack }}>
       <Box mt={3} h={60} w={340} alignSelf="center"
-        borderRadius="10" borderWidth="1.5" borderColor="#1D1D1D"
+        borderRadius="10" borderWidth="1.5"
+        _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
       />
       <Flex position="absolute"
         direction="row" alignItems="center" alignSelf="center"
-        bg="#2AB3C0" w={360} h={65}
+        w={360} h={65}
         borderRadius={10} borderWidth={1.5}
+        _light={{ bg: blueGreen, borderColor: darkBlack }} _dark={{ bg: darkBlack, borderColor: white }}
       >
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
@@ -177,7 +192,8 @@ function MyTabBar({ state, descriptors, navigation }) {
                     return (
                       isFocused
                       ?<Box w={50} h={38}
-                        borderRadius="10" borderWidth="1.5" borderColor="#1D1D1D"
+                        borderRadius="10" borderWidth="1.5"
+                        _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
                         bg="#F9BC75" alignItems="center" justifyContent="center"
                       >
                         <Image size={25} source={require('../asset/home_light.png')}/>
@@ -187,8 +203,9 @@ function MyTabBar({ state, descriptors, navigation }) {
                   }else if(route.name == "AddStack"){
                     return (
                       <Box size={60} mb={30}
-                        borderRadius="60" borderWidth="1.5" borderColor="#1D1D1D"
-                        bg="#A8DEE0" alignItems="center" justifyContent="center"
+                        borderRadius="60" borderWidth="1.5" 
+                        _light={{ bg: blue, borderColor: darkBlack }} _dark={{ bg: blueGreen, borderColor: white }}
+                        alignItems="center" justifyContent="center"
                       >
                         <Image size={30} source={require('../asset/add_light.png')}/>
                       </Box>
@@ -197,7 +214,8 @@ function MyTabBar({ state, descriptors, navigation }) {
                     return (
                       isFocused
                       ?<Box w={50} h={38}
-                        borderRadius="10" borderWidth="1.5" borderColor="#1D1D1D"
+                        borderRadius="10" borderWidth="1.5"
+                        _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
                         bg="#F9BC75" alignItems="center" justifyContent="center"
                       >
                         <Image size={25} source={require('../asset/search_light.png')}/>

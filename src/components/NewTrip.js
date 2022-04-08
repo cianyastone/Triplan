@@ -5,6 +5,12 @@ import moment from "moment";
 import ActionButton from './ActionButton_dark';
 
 const UnfinishedTrip = ({ trip }) => {
+    const black="#1D1D1D";
+    const blue="#2AB3C0";
+    const orange="#F9BC75";
+    const white="#fff";
+    const green="#7EBB94";
+    const darkBlack="#262626";
     const onPress = () =>
     ActionSheet.showActionSheetWithOptions(
       {
@@ -23,11 +29,12 @@ const UnfinishedTrip = ({ trip }) => {
     return (
         <Box w={150} h={200} mr={4} alignItems="center">
             <Box mt={2} h={180} w={138} 
-                borderRadius="25" borderWidth="1.5" borderColor="#1D1D1D"
-                bg="#2AB3C0"
+                borderRadius="25" borderWidth="1.5" 
+                _light={{ bg: blue, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
             />
-            <Flex position='absolute' w={150} h={180} bg="#fff" p={2} justifyContent="space-between" alignItems="center"
-                borderRadius={15} borderWidth="1.5" borderColor="#1D1D1D"
+            <Flex position='absolute' w={150} h={180} p={2} justifyContent="space-between" alignItems="center"
+                borderRadius={15} borderWidth="1.5"
+                _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
             >
                 <Image w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
                 <Flex direction="row" w="100%" justifyContent="space-between" p={2} alignItems="flex-end">
