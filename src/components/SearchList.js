@@ -35,7 +35,7 @@ class SearchFunction extends Component {
         if(text.length >0 ){
             return itemData.indexOf(textData) > -1;
         }else{
-            newData = this.tripData;
+            return this.tripData;
         }
         });
         this.setState({
@@ -57,7 +57,7 @@ class SearchFunction extends Component {
                         borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
                         bg="#fff"
                     />
-                    <Input position='absolute' w={300} placeholder="在這裡搜尋" variant="unstyled"/>
+                    <Input position='absolute' w={300} onChangeText={text => this.searchItems(text)} placeholder="在這裡搜尋" variant="unstyled"/>
                 </Box>
                 <ScrollView>
                     <FlatList
