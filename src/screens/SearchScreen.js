@@ -4,10 +4,8 @@ import SearchList from "../components/SearchList";
 
 const Search = () => {
   return (
-    <Box flex="1">
-      <ScrollView bg="#c8c8c8">
-        <SearchList />
-      </ScrollView>
+    <Box flex="1" px={9} >
+      <SearchList />
     </Box>
   );
 };

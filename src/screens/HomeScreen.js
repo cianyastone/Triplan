@@ -5,6 +5,7 @@ import tripData from "../json/trip.json";
 import UnfinishedTripList from "../components/UnfinishedTripList";
 import FinishedTripList from "../components/FinishedTripList";
 import moment from "moment";
+import ActionButton from '../components/ActionButton_light';
 
 const Home = ({ navigation }) => {
   const onPress = () =>
@@ -22,15 +23,20 @@ const Home = ({ navigation }) => {
       }
     }
   );
+
+  const Setting = () =>{
+    navigation.navigate('Setting');
+    // navigation.setOptions({ tabBarStyle:{ display:'none' }});
+  };
   return (
-    <Box flex="1" alignSelf="center" bg="#fff" px={4}>
+    <Box flex="1" alignSelf="center" bg="#fff" px={25}>
       <Flex direction="row" alignItems="center" py={2} justifyContent="space-between">
         <Flex direction="row" alignItems="center">
           <Image borderRadius={100} size="50" source={require('../asset/userPhoto.png')}/>
           <Text fontSize="xl" ml={2}>Name</Text>
         </Flex>
-        <Pressable onPress={() => navigation.navigate('Setting')}>
-          <Image size={30} source={require('../asset/setting.png')}/>
+        <Pressable onPress={Setting}>
+          <Image size={30} source={require('../asset/setting_dark.png')}/>
         </Pressable>
       </Flex>
 
@@ -54,13 +60,7 @@ const Home = ({ navigation }) => {
                 <Text color="#fff" fontSize="md">{moment(tripData.TripList[1].date).format("DD")}, {moment(tripData.TripList[1].date).format("MMM")}</Text> 
                 <Text color="#fff" fontSize="md">{tripData.TripList[1].days}天{tripData.TripList[1].days-1}夜</Text>
               </Box>
-              <Pressable onPress={onPress}>
-                <Box borderRadius="full" borderWidth={2} borderColor="#fff"
-                  justifyContent="center" size={25} p={1}
-                >
-                  <Image size={17} source={require('../asset/more_light.png')}/>
-                </Box>
-              </Pressable>
+              <ActionButton/>
             </Flex>
           </Flex>
         </Box>

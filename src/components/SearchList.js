@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { FlatList, Box, Input, Text } from "native-base";
-import SearchTrip from "./SearchTrip";
+import { FlatList, Box, Input, ScrollView, Text } from "native-base";
+import SearchTrip from "./NewTrip";
 import tripData from '../json/trip.json';
 
 class SearchFunction extends Component {
@@ -47,20 +47,28 @@ class SearchFunction extends Component {
     render() {
         const renderItem = ({ item }) => <SearchTrip trip={item}/>;
         return (
-            <Box>
-                <Box width="80%" alignSelf="center" my={4}>
-                    <Input
-                        placeholder="在這裡搜尋"
-                        onChangeText={text => this.searchItems(text)}
-                        variant="rounded"
+            <Box flex={1}>
+                <Box my={5} justifyContent="center" >
+                    <Box h={55} w={310} mt={4}
+                        borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#F9BC75" alignSelf="center" justifyContent="center"
                     />
+                    <Box position='absolute' h={55} w={320} 
+                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                        bg="#fff"
+                    />
+                    <Input position='absolute' w={300} placeholder="在這裡搜尋" variant="unstyled"/>
                 </Box>
-                <FlatList
-                    data={this.state.data}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.title}
-                    mb={1}
-                />
+                <ScrollView>
+                    <FlatList
+                        numColumns={2}
+                        data={this.state.data}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.title}
+                        mb={1}
+                        columnWrapperStyle={{ justifyContent: 'space-between'}}
+                    />
+                </ScrollView>
             </Box>
         );
     }

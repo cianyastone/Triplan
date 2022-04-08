@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, Box, Text } from "native-base";
-import UnfinishedTrip from "./UnfinishedTrip";
+import UnfinishedTrip from "./NewTrip";
 
 const FinishedTripList = ({ list }) => {
 const renderItem = ({ item }) => <UnfinishedTrip trip={item}/>;

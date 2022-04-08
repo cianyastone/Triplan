@@ -6,7 +6,7 @@ import { logout } from "../redux/actions/actions";
 const Setting = () => {
     const dispatch = useDispatch();
     const { colorMode, toggleColorMode } = useColorMode();
-
+   
     return (
     <Box pt={5} bg="#fff" flex={1}>
         <VStack alignItems="center">

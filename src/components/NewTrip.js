@@ -2,6 +2,7 @@ import React from "react";
 import { Text, Box, Image, Pressable, Heading, Flex} from "native-base";
 import { ActionSheet } from 'react-native-cross-actionsheet';
 import moment from "moment";
+import ActionButton from './ActionButton_dark';
 
 const UnfinishedTrip = ({ trip }) => {
     const onPress = () =>
@@ -25,22 +26,16 @@ const UnfinishedTrip = ({ trip }) => {
                 borderRadius="25" borderWidth="1.5" borderColor="#1D1D1D"
                 bg="#2AB3C0"
             />
-            <Flex position='absolute' bg="#fff" p={2} justifyContent="space-between"
+            <Flex position='absolute' w={150} h={180} bg="#fff" p={2} justifyContent="space-between" alignItems="center"
                 borderRadius={15} borderWidth="1.5" borderColor="#1D1D1D"
             >
-                <Image w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
-                <Flex direction="row" justifyContent="space-between" p={2} alignItems="flex-end">
+                <Image mt={1} w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
+                <Flex direction="row" w="100%" justifyContent="space-between" p={2} alignItems="flex-end">
                     <Box>
                         <Text fontSize="md">{trip.title}</Text>
                         <Text fontSize="sm">{moment(trip.date).format("DD")}, {moment(trip.date).format("MMM")}</Text> 
                     </Box>
-                    <Pressable onPress={onPress}>
-                        <Box borderRadius="full" borderWidth={2} borderColor="#1D1D1D"
-                            justifyContent="center" alignSelf="flex-end" p={1}
-                        >
-                            <Image size={17} source={require('../asset/more_dark.png')}/>
-                        </Box>
-                    </Pressable>
+                    <ActionButton />
                 </Flex>
             </Flex>
         </Box>
