@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, Box, Image, Pressable, Heading, Flex} from "native-base";
-import { ActionSheet } from 'react-native-cross-actionsheet'
+import { ActionSheet } from 'react-native-cross-actionsheet';
 
 const Trip = ({ trip }) => {
     var date = new Date().getDate();
