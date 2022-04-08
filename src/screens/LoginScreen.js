@@ -28,7 +28,7 @@ const Login = ({ navigation }) => {
                             borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
                             bg="#fff"
                         />
-                        <Input position='absolute' w={310} _focus={focusInputStyle} placeholder="請輸入電子信箱" variant="unstyled"/>
+                        <Input position='absolute' w={310} _focus={focusInputStyle} variant="unstyled"/>
                     </FormControl>
                     <FormControl mb={15} isRequired h={69} justifyContent="center" alignItems="center">
                         <Box bg="#fff" mr={200} h={25} w={86} zIndex={1} alignItems="center">
@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
                             borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
                             bg="#fff"
                         />
-                        <Input type="password" position='absolute' w={310} _focus={focusInputStyle} placeholder="請輸入密碼" variant="unstyled"/>
+                        <Input type="password" position='absolute' w={310} _focus={focusInputStyle} variant="unstyled"/>
                     </FormControl>
                     <Pressable alignItems="center" onPress={() => dispatch(login())}>
                         <Box mt={2} h={55} w={310} 

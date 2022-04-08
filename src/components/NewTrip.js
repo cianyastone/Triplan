@@ -29,7 +29,7 @@ const UnfinishedTrip = ({ trip }) => {
             <Flex position='absolute' w={150} h={180} bg="#fff" p={2} justifyContent="space-between" alignItems="center"
                 borderRadius={15} borderWidth="1.5" borderColor="#1D1D1D"
             >
-                <Image mt={1} w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
+                <Image w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
                 <Flex direction="row" w="100%" justifyContent="space-between" p={2} alignItems="flex-end">
                     <Box>
                         <Text fontSize="md">{trip.title}</Text>

@@ -48,13 +48,13 @@ class SearchFunction extends Component {
         const renderItem = ({ item }) => <SearchTrip trip={item}/>;
         return (
             <Box flex={1}>
-                <Box my={5} justifyContent="center" >
-                    <Box h={55} w={310} mt={4}
+                <Box my={5} justifyContent="center" alignItems="center">
+                    <Box h={50} w={300} mt={3}
                         borderRadius="20" borderWidth="1.5" borderColor="#1D1D1D"
-                        bg="#F9BC75" alignSelf="center" justifyContent="center"
+                        bg="#F9BC75" alignSelf="center"
                     />
-                    <Box position='absolute' h={55} w={320} 
-                        borderRadius="15" borderWidth="1.5" borderColor="#1D1D1D"
+                    <Box position='absolute' h={50} w={320} 
+                        borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
                         bg="#fff"
                     />
                     <Input position='absolute' w={300} onChangeText={text => this.searchItems(text)} placeholder="在這裡搜尋" variant="unstyled"/>
