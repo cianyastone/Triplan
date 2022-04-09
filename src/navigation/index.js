@@ -47,7 +47,7 @@ const MyTabs = () => {
       tabBar={(props) => <MyTabBar {...props}/>}
       screenOptions={{ headerShown: false, }}>
       <Tab.Screen name="HomeStack" component={HomeStack}/>
-      <Tab.Screen name="AddStack" component={TripTab}/>
+      <Tab.Screen name="AddStack" component={TripStack}/>
       <Tab.Screen name="SearchStack" component={Search}/>
     </Tab.Navigator>
   );
@@ -87,35 +87,17 @@ const HomeStack = ({ navigation: { goBack }, navigation }) => {
   );
 }
 
-const TripStack = () => {
+const TripStack = ({ navigation: { goBack }, navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen 
         name="Trip" 
         component={TripPlanScreen} 
         options={{
-          title: '行程標題',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20
-          }, 
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
-  );
-}
-
-const TripTab = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen 
-        name="行程標題" 
-        component={TripStack} 
-        options={{
-          headerShown: false,
-        }}
-        />
-    </Tab.Navigator>
   );
 }
 
