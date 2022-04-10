@@ -1,16 +1,16 @@
 import React from 'react';
-import { Box, Pressable, Actionsheet, useDisclose, Image, Center, Text } from 'native-base';
+import { Pressable, Actionsheet, useDisclose, Image, Center, Text, useColorMode } from 'native-base';
 
 export default () => {
   const { isOpen, onOpen, onClose } = useDisclose();
+
   return (
     <>
       <Pressable onPress={onOpen}>
-        <Box borderRadius="full" borderWidth={2} borderColor="#1D1D1D"
-          justifyContent="center" size={25} p={1}
-          >
-        <Image size={17} source={require('../asset/more_dark.png')}/>
-        </Box>
+        <Image 
+          size={17} 
+          source={require('../asset/more_dark.png')}
+        />
       </Pressable>
       <Actionsheet isOpen={isOpen} onClose={onClose}>
         <Actionsheet.Content borderTopWidth={1.5} borderLeftWidth={1.5} borderRightWidth={1.5}>

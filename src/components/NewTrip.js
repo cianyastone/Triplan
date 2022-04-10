@@ -1,8 +1,7 @@
 import React from "react";
-import { Text, Box, Image, Pressable, Heading, Flex} from "native-base";
-import { ActionSheet } from 'react-native-cross-actionsheet';
+import { Text, Box, Image, Pressable, Heading, Flex,  } from "native-base";
 import moment from "moment";
-import ActionButton from './ActionButton_dark';
+import ActionButton from './ActionButton';
 
 const UnfinishedTrip = ({ trip }) => {
     const black="#1D1D1D";
@@ -11,21 +10,6 @@ const UnfinishedTrip = ({ trip }) => {
     const white="#fff";
     const green="#7EBB94";
     const darkBlack="#262626";
-    const onPress = () =>
-    ActionSheet.showActionSheetWithOptions(
-      {
-        options: ["取消", "分享", "刪除"],
-        destructiveButtonIndex: 2,
-        cancelButtonIndex: 0,
-        userInterfaceStyle: 'dark',
-      },
-      buttonIndex => {
-        if (buttonIndex === 0) {
-        } else if (buttonIndex === 1) {
-        } else if (buttonIndex === 2) {
-        }
-      }
-    );
     return (
         <Box w={150} h={200} mr={4} alignItems="center">
             <Box mt={2} h={180} w={138} 

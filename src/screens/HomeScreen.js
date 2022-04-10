@@ -1,11 +1,10 @@
 import React from "react";
 import { ScrollView, Text, Heading, Box, Image, Flex, Pressable, useColorMode } from 'native-base';
-import { ActionSheet } from 'react-native-cross-actionsheet';
 import tripData from "../json/trip.json";
 import UnfinishedTripList from "../components/UnfinishedTripList";
 import FinishedTripList from "../components/FinishedTripList";
 import moment from "moment";
-import ActionButton from '../components/ActionButton_light';
+import ActionButton from '../components/ActionButtonTop';
 
 const Home = ({ navigation }) => {
   const { colorMode } = useColorMode();
@@ -15,21 +14,6 @@ const Home = ({ navigation }) => {
   const white="#fff";
   const green="#7EBB94";
   const darkBlack="#262626";
-  const onPress = () =>
-    ActionSheet.showActionSheetWithOptions(
-    {
-      options: ["取消", "分享", "刪除"],
-      destructiveButtonIndex: 2,
-      cancelButtonIndex: 0,
-      userInterfaceStyle: 'black',
-    },
-    buttonIndex => {
-      if (buttonIndex === 0) {
-      } else if (buttonIndex === 1) {
-      } else if (buttonIndex === 2) {
-      }
-    }
-  );
 
   const Setting = () =>{
     navigation.navigate('Setting');
