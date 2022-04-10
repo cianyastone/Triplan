@@ -1,18 +1,15 @@
 import React, {useState, useCallback, Component} from "react";
-import { ScrollView, Linking, View, Image, TouchableOpacity } from 'react-native';
-import { Button, Card, Text, PricingCard, Tile } from 'react-native-elements';
+import { FlatList, Box, Input, ScrollView, Text } from "native-base";
+import { Linking, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import DraggableFlatList, { RenderItemParams, } from 'react-native-draggable-flatlist';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 const Goal_data = [
   {
-    key: "0",
-    label: "Group",
-    backgroundColor: "#ababab",
-  },
-  {
     key: "1",
     label: "Group",
-    backgroundColor: "#ababab",
+    backgroundColor: "#white",
   }
 ]
   
@@ -22,10 +19,17 @@ export default class  DayScreen extends Component {
     super(props)
     this.state = {
       data: Goal_data,
-      scrollEnabled: true
+      scrollEnabled: true,
+      // chosenDate: new Date(),
     }
+    // this.setDate = this.setDate.bind(this);
 
   }
+
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate });
+  }
+
   onEnableScroll = (value) => {
     this.setState({
       enableScrollViewScroll: value,
@@ -33,38 +37,11 @@ export default class  DayScreen extends Component {
   }
 
 
-  renderItem1 = ({ item, index, drag, isActive }) => {
-
-    console.log('index', item)
-    return (
-      <TouchableOpacity
-        style={{
-          height: 70,
-          backgroundColor: isActive ? "blue" : item.backgroundColor,
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-        onLongPress={drag}
-      >
-        <Text
-          style={{
-            fontWeight: "bold",
-            color: "white",
-            fontSize: 20
-          }}
-        >
-          {item.label}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-
-
 
   plusdata = (data) => {
     let d = this.state.data;
     const newRecord = {
-      key: "2",
+      key: "3",
       label: "Group",
     };
     this.setState({
@@ -73,10 +50,11 @@ export default class  DayScreen extends Component {
   }
   render() {
   return(
-    <View style={{flex: 1, backgroundColor:'white'}}>
+    <View style={{flex: 1, backgroundColor:'white' ,}}>
       <View style={{
         justifyContent: "center",
         alignItems: "center",
+        
       }}>
         <Image 
         source={require('../../assets/splash.png')}
@@ -90,11 +68,26 @@ export default class  DayScreen extends Component {
         justifyContent: "center",
         alignItems: "center",
       }}> */}
+      
       <ScrollView>
+        <View style={{
+          display:'flex',
+        flexDirection: "row",
+        justifyContent:'center',
+       }}>
+              <View style={{width:300, }}>
               <View>
-
+                <View style={{
+                   justifyContent:'space-between',
+              height: 20,
+              width: 20,
+              borderRadius: 10,
+              borderColor: "#1D1D1D",
+              borderWidth: 2,
+              backgroundColor: "#7EBB94"}} />
+              </View>
               
-              <View style={{ backgroundColor: 'white', flex: 1, paddingHorizontal: 30 }}>
+              <Box flex={1} ml={20}>
                 
                 <DraggableFlatList
                   data={this.state.data}
@@ -107,33 +100,60 @@ export default class  DayScreen extends Component {
                     return (
                       <TouchableOpacity
                         style={{
-                          backgroundColor: isActive ? "gray" : item.backgroundColor,
+                          backgroundColor:"white",
                           //alignItems: "center",
-                          justifyContent: "center",
-                          marginVertical: 20
-
+                          justifyContent: 'space-between',
                         }}
                         onLongPress={drag}
                       >
-                        <View style={{ backgroundColor: 'white', borderColor: '#000', borderWidth: 1, paddingHorizontal: 30 }}>
-                          <Text>{item.label}{index}</Text>
-                    
-
+                      {/* backgroundColor: isActive ? "white" : item.backgroundColor, */}
+                      <Box mb={5} justifyContent="center" alignItems="center">
+                          <Box h={90} w={230} mt={3}
+                              borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
+                              bg="#F9BC75" alignSelf="center"
+                          />
+                          <Box position='absolute' h={90} w={240} 
+                              borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
+                              bg="#fff"
+                          >
+                          <Input h={17} size="md" mt={25} ml={30} variant="unstyled">第 {index+1} 個行程</Input>
+                          <Input h={17} size="sm" mt={2} ml={30} variant="unstyled">地址</Input>
+                          {/* <DateTimePicker
+                          mode="time"
+                          value={new Date(12,00)}
+                          display="inline"
+                          textColor="red"
+                          placeHolderText="Select time"
+                          onChange={this.setDate}
+                          /> */}
+                          </Box>
                           
-                        </View>
+                      </Box>
                        
                       </TouchableOpacity>
                     );
                   }}
                 /> 
-                <TouchableOpacity style={{ marginTop: 50, alignSelf: 'center' }} onPress={() => this.plusdata(Goal_data)}>
-                  <Text>Add</Text>
+                <Box mb={5} justifyContent="center" alignItems="center">
+                          <Box h={90} w={230} mt={3}
+                              borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
+                              bg="#F9BC75" alignSelf="center"
+                          />
+                          <Box position='absolute' h={90} w={240} 
+                              borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
+                              bg="#fff" justifyContent='center'
+                >
+                <TouchableOpacity style={{marginLeft:30}} onPress={() => this.plusdata(Goal_data)}>
+                  <Text>新增行程</Text>
                 </TouchableOpacity>
+                </Box>
+                </Box>
+              </Box>
               </View>
               </View>
             </ScrollView>
       
-      {/* </View> */}
+      
     </View>
   );}
 }
