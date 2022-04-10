@@ -1,49 +1,36 @@
 import React from "react";
-import { Text, Box, Image, Pressable, Heading, Flex} from "native-base";
-import { ActionSheet } from 'react-native-cross-actionsheet';
+import { Text, Box, Image, Pressable, Heading, Flex } from "native-base";
+import moment from "moment";
+import ActionButton from './ActionButton';
 
-const Trip = ({ trip }) => {
-    var date = new Date().getDate();
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-
-    const onPress = () =>
-    ActionSheet.showActionSheetWithOptions(
-      {
-        options: ["取消", "分享", "刪除"],
-        destructiveButtonIndex: 2,
-        cancelButtonIndex: 0,
-        userInterfaceStyle: 'dark',
-      },
-      buttonIndex => {
-        if (buttonIndex === 0) {
-          // cancel action
-        } else if (buttonIndex === 1) {
-          
-        } else if (buttonIndex === 2) {
-          
-        }
-      }
-    );
+const UnfinishedTrip = ({ trip }) => {
+    const black="#1D1D1D";
+    const blue="#2AB3C0";
+    const orange="#F9BC75";
+    const white="#fff";
+    const green="#7EBB94";
+    const darkBlack="#262626";
+    const darkWhite="#E4E4E4";
     return (
-    <Flex bg="#fff" p="5" mb="1" justifyContent="space-between" direction="row">
-        <Box justifyContent="space-between">
-            {
-                trip.day >= date && trip.month >= month && trip.year >= year
-                ?<Text fontSize="xs">未完成</Text>
-                :<Text fontSize="xs">已完成</Text>
-            }
-            <Heading size="md">{trip.title}</Heading>
-            <Text fontSize="md">{trip.days}天{trip.days-1}夜</Text>
-            <Text fontSize="md">從{trip.year}年, {trip.month}月, {trip.day}日開始</Text>
+        <Box w={150} h={200} mr={4} alignItems="center">
+            <Box mt={2} h={180} w={138} 
+                borderRadius="25" borderWidth="1.5" 
+                _light={{ bg: blue, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
+            />
+            <Flex position='absolute' w={150} h={180} p={2} justifyContent="space-between" alignItems="center"
+                borderRadius={15} borderWidth="1.5"
+                _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
+            >
+                <Image w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
+                <Flex direction="row" w="100%" justifyContent="space-between" p={2} alignItems="flex-end">
+                    <Box>
+                        <Text fontSize="md">{trip.title}</Text>
+                        <Text fontSize="sm">{moment(trip.date).format("DD")}, {moment(trip.date).format("MMM")}, {moment(trip.date).format("YY")}</Text> 
+                    </Box>
+                    <ActionButton />
+                </Flex>
+            </Flex>
         </Box>
-        <Box alignItems="flex-end">
-            <Pressable onPress={onPress}>
-                <Image source={require('../asset/option.png')}/>
-            </Pressable>
-            <Image w={135} h={71} source={{uri: trip.image}}/>
-        </Box>
-    </Flex>
 )};
 
-export default Trip;
+export default UnfinishedTrip;

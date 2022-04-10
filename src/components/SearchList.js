@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { FlatList, Box, Input, ScrollView, Text } from "native-base";
-import SearchTrip from "./NewTrip";
+import { FlatList, Box, Input, ScrollView } from "native-base";
+import Trip from "./Trip";
 import tripData from '../json/trip.json';
 
 class SearchFunction extends Component {
@@ -45,7 +45,7 @@ class SearchFunction extends Component {
     };
 
     render() {
-        const renderItem = ({ item }) => <SearchTrip trip={item}/>;
+        const renderItem = ({ item }) => <Trip trip={item}/>;
         const black="#1D1D1D";
         const blue="#2AB3C0";
         const orange="#F9BC75";

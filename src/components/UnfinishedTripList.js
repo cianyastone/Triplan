@@ -1,13 +1,18 @@
 import React from "react";
 import { FlatList, Box, Text } from "native-base";
-import UnfinishedTrip from "./NewTrip";
+import UnfinishedTrip from "./Trip";
 
 const UnfinishedTripList = ({ list }) => {
-const renderItem = ({ item }) => <UnfinishedTrip trip={item}/>;
+  const renderItem = ({ item }) => <UnfinishedTrip trip={item}/>;
+  const currentTime = new Date().toISOString();
+  const unfinished = list.filter((x) => x.date > currentTime);
+  const sort = unfinished.sort((a, b) => a.date.localeCompare(b.date));
+  sort.shift();
+
   return (
     <Box>
       <FlatList
-        data={list}
+        data={sort}
         renderItem={renderItem}
         horizontal={true}
         keyExtractor={item => item.title}
