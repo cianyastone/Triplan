@@ -12,6 +12,7 @@ const Setting = () => {
     const white="#fff";
     const green="#7EBB94";
     const darkBlack="#262626";
+    const darkWhite="#E4E4E4";
    
     return (
     <Box pt={5} _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>

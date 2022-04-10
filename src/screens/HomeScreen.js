@@ -1,9 +1,10 @@
 import React from "react";
+import Feather from 'react-native-vector-icons/Feather';
 import { ScrollView, Text, Heading, Box, Image, Flex, Pressable, useColorMode } from 'native-base';
 import tripData from "../json/trip.json";
+import moment from "moment";
 import UnfinishedTripList from "../components/UnfinishedTripList";
 import FinishedTripList from "../components/FinishedTripList";
-import moment from "moment";
 import ActionButton from '../components/ActionButtonTop';
 
 const Home = ({ navigation }) => {
@@ -14,6 +15,7 @@ const Home = ({ navigation }) => {
   const white="#fff";
   const green="#7EBB94";
   const darkBlack="#262626";
+  const darkWhite="#E4E4E4";
 
   const Setting = () =>{
     navigation.navigate('Setting');
@@ -27,11 +29,7 @@ const Home = ({ navigation }) => {
           <Text fontSize="xl" ml={2}>Name</Text>
         </Flex>
         <Pressable onPress={Setting}>
-          {
-            colorMode === 'light'
-            ?<Image size={30} source={require('../asset/setting_dark.png')}/>
-            :<Image size={30} source={require('../asset/setting_light.png')}/>
-          }
+        <Feather name="settings" size={28} color={ colorMode == 'light' ? black : darkWhite } />
         </Pressable>
       </Flex>
 
@@ -40,21 +38,21 @@ const Home = ({ navigation }) => {
         <Box h={220} alignItems="center" mb={30}>
           <Box mt={2} h={210} w={320}
             borderRadius="25" borderWidth="1.5"
-            _light={{ bg: orange, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
+            _light={{ bg: orange, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
           />
           <Flex position="absolute" w="100%" h={210} justifyContent="center"
             borderRadius={20} borderWidth="1.5"
-            _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}
+            _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
           >
-            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} source={{uri: tripData.TripList[1].image}}/>
+            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} source={{uri: tripData.TripList[4].image}}/>
             <Box position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} bg="rgba(29, 29, 29, 0.4)"/>
             <Flex h="100%" w="100%" p={5}
               direction="row" justifyContent="space-between"
             >
               <Box mt={90}>
-                <Heading color={white} size="lg">{tripData.TripList[1].title}</Heading>
-                <Text color={white} fontSize="md">{moment(tripData.TripList[1].date).format("DD")}, {moment(tripData.TripList[1].date).format("MMM")}</Text> 
-                <Text color={white} fontSize="md">{tripData.TripList[1].days}天{tripData.TripList[1].days-1}夜</Text>
+                <Heading color={white} size="lg">{tripData.TripList[4].title}</Heading>
+                <Text color={white} fontSize="md">{moment(tripData.TripList[4].date).format("DD")}, {moment(tripData.TripList[1].date).format("MMM")}</Text> 
+                <Text color={white} fontSize="md">{tripData.TripList[4].days}天{tripData.TripList[1].days-1}夜</Text>
               </Box>
               <ActionButton/>
             </Flex>

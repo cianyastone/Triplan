@@ -20,7 +20,10 @@ const Login = ({ navigation }) => {
         <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
             <ScrollView>
                 <Center mt={100} mb={10}>
-                    <Image size={125} source={{uri: "https://i.pinimg.com/564x/cc/1e/63/cc1e6373b8513d776fa28e7f3e58fd14.jpg"}}/>
+                    <Image size={125} source={require('../asset/logo.png')}
+                    borderRadius={15} borderWidth={1.5}
+                    _light={{ borderColor: black }} _dark={{ borderColor: white }}
+                    />
                 </Center>
                 <VStack alignItems="center" mb={20}>
                     <FormControl mb={15} isRequired h={69} justifyContent="center" alignItems="center">

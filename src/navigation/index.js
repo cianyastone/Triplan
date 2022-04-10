@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { useSelector } from "react-redux";
 import { Image, KeyboardAvoidingView, Pressable, Box, Flex, useColorMode } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from "../screens/HomeScreen";
@@ -62,6 +62,7 @@ const MyTabs = () => {
 
 const HomeStack = ({ navigation: { goBack } }) => {
   const { colorMode } = useColorMode();
+  const { colors } = useTheme();
   return (
     <Stack.Navigator>
       <Stack.Screen 
