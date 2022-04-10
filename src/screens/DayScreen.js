@@ -64,31 +64,18 @@ export default class  DayScreen extends Component {
         }}
         />
       </View>
-      {/* <View style={{
-        justifyContent: "center",
-        alignItems: "center",
-      }}> */}
       
       <ScrollView>
         <View style={{
-          display:'flex',
         flexDirection: "row",
         justifyContent:'center',
        }}>
-              <View style={{width:300, }}>
-              <View>
-                <View style={{
-                   justifyContent:'space-between',
-              height: 20,
-              width: 20,
-              borderRadius: 10,
-              borderColor: "#1D1D1D",
-              borderWidth: 2,
-              backgroundColor: "#7EBB94"}} />
-              </View>
+              <View style={{width:300}}>
               
-              <Box flex={1} ml={20}>
-                
+              <Box flexDir='row'>
+                  <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
+                      borderColor={"#1D1D1D"} borderWidth={2} bgColor={"#7EBB94"} />
+                <Box flexDir='column' width={61}>
                 <DraggableFlatList
                   data={this.state.data}
                   extraData={this.state.data}
@@ -99,13 +86,9 @@ export default class  DayScreen extends Component {
                     console.log('index', item)
                     return (
                       <TouchableOpacity
-                        style={{
-                          backgroundColor:"white",
-                          //alignItems: "center",
-                          justifyContent: 'space-between',
-                        }}
                         onLongPress={drag}
                       >
+                        
                       {/* backgroundColor: isActive ? "white" : item.backgroundColor, */}
                       <Box mb={5} justifyContent="center" alignItems="center">
                           <Box h={90} w={230} mt={3}
@@ -134,6 +117,7 @@ export default class  DayScreen extends Component {
                     );
                   }}
                 /> 
+                
                 <Box mb={5} justifyContent="center" alignItems="center">
                           <Box h={90} w={230} mt={3}
                               borderRadius="30" borderWidth="1.5" borderColor="#1D1D1D"
@@ -146,6 +130,7 @@ export default class  DayScreen extends Component {
                 <TouchableOpacity style={{marginLeft:30}} onPress={() => this.plusdata(Goal_data)}>
                   <Text>新增行程</Text>
                 </TouchableOpacity>
+                </Box>
                 </Box>
                 </Box>
               </Box>

@@ -14,19 +14,6 @@ const TripPlanScreen = ({ navigation }) => {
 
   return (
     <View style={{flex: 1, backgroundColor:'white'}}>
-      {/* <View style={{
-        height: 62, 
-        backgroundColor:"white", 
-        flexDirection: "row",
-        }}>
-          <Pressable ml={6} onPress={() => navigation.goBack()}>
-              <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
-                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
-              >
-                <Image size={28} source={require('../asset/back.png')}/>
-              </Box>
-          </Pressable>
-      </View> */}
       <View 
       style={{
         flexDirection: "row",
