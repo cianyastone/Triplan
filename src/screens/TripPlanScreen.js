@@ -1,8 +1,9 @@
 import React , { useState } from "react";
-import { View, FlatList, Button, Text } from "react-native";
+import { View, FlatList, Button, Text, Image, Box, Pressable } from "react-native";
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Home from "./HomeScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -12,7 +13,20 @@ const TripPlanScreen = ({ navigation }) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor:'white'}}>
+      {/* <View style={{
+        height: 62, 
+        backgroundColor:"white", 
+        flexDirection: "row",
+        }}>
+          <Pressable ml={6} onPress={() => navigation.goBack()}>
+              <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
+                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+              >
+                <Image size={28} source={require('../asset/back.png')}/>
+              </Box>
+          </Pressable>
+      </View> */}
       <View 
       style={{
         flexDirection: "row",
@@ -44,7 +58,7 @@ const TripPlanScreen = ({ navigation }) => {
           }}
         />
       </View>
-      <Tab.Navigator>
+      <Tab.Navigator style={{flex: 1, backgroundColor:'white'}}>
         <Tab.Screen name="First Day" component={DayScreen} />
         <Tab.Screen name="Second Day" component={DayScreen} />
       </Tab.Navigator>

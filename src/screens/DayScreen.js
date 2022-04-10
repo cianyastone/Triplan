@@ -1,10 +1,79 @@
-import React from "react";
-import { ScrollView, Linking, View, Image } from 'react-native';
+import React, {useState, useCallback, Component} from "react";
+import { ScrollView, Linking, View, Image, TouchableOpacity } from 'react-native';
 import { Button, Card, Text, PricingCard, Tile } from 'react-native-elements';
+import DraggableFlatList, { RenderItemParams, } from 'react-native-draggable-flatlist';
 
-const DayScreen = () => {
+const Goal_data = [
+  {
+    key: "0",
+    label: "Group",
+    backgroundColor: "#ababab",
+  },
+  {
+    key: "1",
+    label: "Group",
+    backgroundColor: "#ababab",
+  }
+]
+  
+
+export default class  DayScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: Goal_data,
+      scrollEnabled: true
+    }
+
+  }
+  onEnableScroll = (value) => {
+    this.setState({
+      enableScrollViewScroll: value,
+    });
+  }
+
+
+  renderItem1 = ({ item, index, drag, isActive }) => {
+
+    console.log('index', item)
+    return (
+      <TouchableOpacity
+        style={{
+          height: 70,
+          backgroundColor: isActive ? "blue" : item.backgroundColor,
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+        onLongPress={drag}
+      >
+        <Text
+          style={{
+            fontWeight: "bold",
+            color: "white",
+            fontSize: 20
+          }}
+        >
+          {item.label}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
+
+
+  plusdata = (data) => {
+    let d = this.state.data;
+    const newRecord = {
+      key: "2",
+      label: "Group",
+    };
+    this.setState({
+      data: [...d, newRecord]
+    })
+  }
+  render() {
   return(
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor:'white'}}>
       <View style={{
         justifyContent: "center",
         alignItems: "center",
@@ -17,61 +86,56 @@ const DayScreen = () => {
         }}
         />
       </View>
-      <View style={{
+      {/* <View style={{
         justifyContent: "center",
         alignItems: "center",
-      }}>
-      <Card
-        containerStyle={{
-          borderRadius: 20,
-          height: 80,
-          width: 330,
-          // justifyContent: "center",
-        }}
-      >
-        <View
-        style={{
-          marginLeft: 25,
-          flexDirection: "row",
-          justifyContent: "flex-start",
-        }}>
-          <View style={{
-            flexDirection: "column",
-            alignItems: "center",}}
-          >
-            <Text style={{fontSize:12}}>時間</Text>
-            <View style={{
-              borderColor: 'black',
-              borderBottomWidth: 15,
-              width: 1,
-              }} 
-            />
-            <Text style={{fontSize:12}}>時間</Text>
-          </View>
-          <View style={{
-            justifyContent: "center",
-            marginLeft:25,}}>
-            <View style={{
-              height: 18,
-              width: 18,
-              borderRadius: 9,
-              backgroundColor: "gray"
-              }} />
-          </View>
-          <View style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            marginLeft:25,}}>
-            <Text style={{fontSize:14}}>第一個行程</Text>
-            <Text style={{fontSize:12,marginTop:5,}}>地址</Text>
-          </View>
-        </View>
-        
-      </Card>
+      }}> */}
+      <ScrollView>
+              <View>
+
+              
+              <View style={{ backgroundColor: 'white', flex: 1, paddingHorizontal: 30 }}>
+                
+                <DraggableFlatList
+                  data={this.state.data}
+                  extraData={this.state.data}
+                  keyExtractor={(item, index) => `draggable-item-${index}`}
+                  //onMoveBegin={() => this.setState({ scrollEnabled: false })}
+                  onDragEnd={({ data }) => this.setState({ data: data })}
+                  renderItem={({ item, index, drag, isActive }) => {
+                    console.log('index', item)
+                    return (
+                      <TouchableOpacity
+                        style={{
+                          backgroundColor: isActive ? "gray" : item.backgroundColor,
+                          //alignItems: "center",
+                          justifyContent: "center",
+                          marginVertical: 20
+
+                        }}
+                        onLongPress={drag}
+                      >
+                        <View style={{ backgroundColor: 'white', borderColor: '#000', borderWidth: 1, paddingHorizontal: 30 }}>
+                          <Text>{item.label}{index}</Text>
+                    
+
+                          
+                        </View>
+                       
+                      </TouchableOpacity>
+                    );
+                  }}
+                /> 
+                <TouchableOpacity style={{ marginTop: 50, alignSelf: 'center' }} onPress={() => this.plusdata(Goal_data)}>
+                  <Text>Add</Text>
+                </TouchableOpacity>
+              </View>
+              </View>
+            </ScrollView>
       
-      </View>
+      {/* </View> */}
     </View>
-  );
+  );}
 }
 
-export default DayScreen;
+// export default DayScreen;

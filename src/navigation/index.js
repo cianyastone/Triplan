@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { useSelector } from "react-redux";
-import { Image, KeyboardAvoidingView, Pressable, Box, Flex } from 'native-base';
+import { Image, KeyboardAvoidingView, Pressable, Box, Flex, TextInput } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -94,7 +94,24 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
         name="Trip" 
         component={TripPlanScreen} 
         options={{
-          headerShown: false,
+          headerTitle: () => {<TextInput
+            textContentType='name'
+            placeholder='Search'
+            placeholderTextColor='white'
+            placeholderStyle={{ marginLeft: 50 }} />},
+          headerTitleStyle: {
+            fontSize: 16,
+            color: "black",
+          },
+          headerLeft: () => (
+            <Pressable ml={6}onPress={() => goBack()}>
+              <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
+                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+              >
+                <Image size={28} source={require('../asset/back.png')}/>
+              </Box>
+            </Pressable>
+          ),
         }}
       />
     </Stack.Navigator>
