@@ -33,7 +33,7 @@ export default class  TripPlanScreen extends Component {
       data: Goal_data,
       data1: Goal_data1,
       scrollEnabled: true,
-      viewSection :false,
+      viewSection :true,
       // chosenDate: new Date(),
     }
     // this.setDate = this.setDate.bind(this);
