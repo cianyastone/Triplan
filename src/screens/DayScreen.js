@@ -1,7 +1,7 @@
-import React, {useState, useCallback, Component} from "react";
-import { FlatList, Box, Input, ScrollView, Text } from "native-base";
-import { Linking, View, Image, TouchableOpacity, TextInput } from 'react-native';
-import DraggableFlatList, { RenderItemParams, } from 'react-native-draggable-flatlist';
+import React, {Component} from "react";
+import { Box, Input, ScrollView, Text } from "native-base";
+import { View, Image, TouchableOpacity, TextInput } from 'react-native';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -9,7 +9,7 @@ const Goal_data = [
   {
     key: "1",
     label: "Group",
-    backgroundColor: "#white",
+    backgroundColor: "#black",
   }
 ]
   
@@ -41,7 +41,7 @@ export default class  DayScreen extends Component {
   plusdata = (data) => {
     let d = this.state.data;
     const newRecord = {
-      key: "3",
+      key: "2",
       label: "Group",
     };
     this.setState({

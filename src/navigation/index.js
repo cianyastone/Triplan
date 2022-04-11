@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { useSelector } from "react-redux";
-import { Image, KeyboardAvoidingView, Pressable, Box, Flex, TextInput } from 'native-base';
+import { Image, KeyboardAvoidingView, Pressable, Box, Flex, Input } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -47,7 +47,10 @@ const MyTabs = () => {
       tabBar={(props) => <MyTabBar {...props}/>}
       screenOptions={{ headerShown: false, }}>
       <Tab.Screen name="HomeStack" component={HomeStack}/>
-      <Tab.Screen name="AddStack" component={TripStack}/>
+      <Tab.Screen name="AddStack" options={{
+            // hide the bottom tab bar on Product Screen
+            tabBarStyle: { display: "none" },
+          }} component={TripStack}/>
       <Tab.Screen name="SearchStack" component={Search}/>
     </Tab.Navigator>
   );
@@ -94,13 +97,9 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
         name="Trip" 
         component={TripPlanScreen} 
         options={{
-          headerTitle: () => {<TextInput
-            textContentType='name'
-            placeholder='Search'
-            placeholderTextColor='white'
-            placeholderStyle={{ marginLeft: 50 }} />},
+          headerTitle: "行程",
           headerTitleStyle: {
-            fontSize: 16,
+            fontSize: 20,
             color: "black",
           },
           headerLeft: () => (
