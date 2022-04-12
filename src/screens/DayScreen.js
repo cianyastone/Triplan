@@ -91,10 +91,10 @@ export default class  DayScreen extends Component {
        }}>
               <View style={{width:310}}>
               
-              <Box flexDir='row'>
+              {/* <Box flexDir='row'>
                   <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
-                      _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }} borderWidth={2} bgColor={green} />
-                <Box flexDir='column' width={61}>
+                      _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }} borderWidth={2} bgColor={green} /> */}
+                <Box flexDir='column' width={310}>
                 <DraggableFlatList
                   data={this.state.data}
                   extraData={this.state.data}
@@ -107,7 +107,9 @@ export default class  DayScreen extends Component {
                       <TouchableOpacity
                         onLongPress={drag}
                       >
-                        
+                        <Box flexDir='row'>
+                        <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
+                      _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }} borderWidth={2} bgColor={green} />
                       {/* backgroundColor: isActive ? "white" : item.backgroundColor, */}
                       <Box mb={5} justifyContent="center" alignItems="center">
                           <Box h={90} w={230} mt={3}
@@ -130,12 +132,14 @@ export default class  DayScreen extends Component {
                           </Box>
                           
                       </Box>
-                       
+                      </Box>
                       </TouchableOpacity>
                     );
                   }}
                 /> 
-                
+                <Box flexDir='row'>
+                        <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
+                      _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }} borderWidth={2} />
                 <Box mb={5} justifyContent="center" alignItems="center">
                           <Box h={90} w={230} mt={3}
                               borderRadius="30" borderWidth="1.5" _light={{ borderColor: darkBlack,bg: lightYellow }} _dark={{ borderColor: white, bg: orange }}
@@ -151,7 +155,8 @@ export default class  DayScreen extends Component {
                 </Box>
                 </Box>
                 </Box>
-              </Box>
+                </Box>
+              {/* </Box> */}
               </View>
               </View>
             </ScrollView>
