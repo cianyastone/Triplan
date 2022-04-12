@@ -5,6 +5,8 @@ import { Image, KeyboardAvoidingView, Pressable, Box, Flex, useColorMode } from 
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import SafeAreaView from 'react-native-safe-area-view';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Home from "../screens/HomeScreen";
 import Login from '../screens/LoginScreen';
 import Register from '../screens/RegisterSceen';
@@ -24,8 +26,10 @@ const darkBlack="#262626";
 
 const Navigation = () => {
   const { login } = useSelector((state) => state.account);
+  const { colorMode } = useColorMode();
 
   return (
+  
     <KeyboardAvoidingView
         keyboardVerticalOffset={Platform.select({ ios: 0, android: -500 })}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -160,7 +164,9 @@ const UserStack = () => {
 }
 
 function MyTabBar({ state, descriptors, navigation }) {
+  const { colorMode } = useColorMode();
   return (
+<SafeAreaView forceInset={{ bottom: 'always' }} style={{ backgroundColor: colorMode == 'light' ? white : darkBlack, }}>
     <Box _light={{ bg: white }} _dark={{ bg: darkBlack }}>
       <Box mt={3} h={60} w={340} alignSelf="center"
         borderRadius="10" borderWidth="1.5"
@@ -235,6 +241,7 @@ function MyTabBar({ state, descriptors, navigation }) {
         })}
       </Flex>
     </Box>
+    </SafeAreaView>
   );
 }
 

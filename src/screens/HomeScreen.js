@@ -6,6 +6,7 @@ import moment from "moment";
 import UnfinishedTripList from "../components/UnfinishedTripList";
 import FinishedTripList from "../components/FinishedTripList";
 import ActionButton from '../components/ActionButtonTop';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const Home = ({ navigation }) => {
   const { colorMode } = useColorMode();
@@ -27,6 +28,7 @@ const Home = ({ navigation }) => {
   const recent = sort[0];
 
   return (
+    <SafeAreaView style={{ flex: 1,  backgroundColor: colorMode == 'light' ? white : darkBlack, }}>
     <Box flex="1" alignSelf="center" _light={{ bg: white }} _dark={{ bg: darkBlack }} px={25}>
       <Flex direction="row" alignItems="center" py={2} justifyContent="space-between">
         <Flex direction="row" alignItems="center">
@@ -73,6 +75,7 @@ const Home = ({ navigation }) => {
         <FinishedTripList list={tripData.TripList}/>
       </ScrollView>
     </Box>
+    </SafeAreaView>
   );
 };
 
