@@ -54,7 +54,10 @@ const MyTabs = () => {
       tabBar={(props) => <MyTabBar {...props}/>}
       screenOptions={{ headerShown: false, }}>
       <Tab.Screen name="HomeStack" component={HomeStack}/>
-      <Tab.Screen name="AddStack" component={TripTab}/>
+      <Tab.Screen name="AddStack" options={{
+            // hide the bottom tab bar on Product Screen
+            tabBarStyle: { display: "none" },
+          }} component={TripStack}/>
       <Tab.Screen name="SearchStack" component={Search}/>
     </Tab.Navigator>
   );
@@ -101,35 +104,30 @@ const HomeStack = ({ navigation: { goBack } }) => {
   );
 }
 
-const TripStack = () => {
+const TripStack = ({ navigation: { goBack }, navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen 
         name="Trip" 
         component={TripPlanScreen} 
         options={{
-          title: '行程標題',
+          headerTitle: "行程",
           headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20
-          }, 
+            fontSize: 20,
+            color: "black",
+          },
+          headerLeft: () => (
+            <Pressable ml={6}onPress={() => goBack()}>
+              <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
+                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+              >
+                <Image size={28} source={require('../asset/back.png')}/>
+              </Box>
+            </Pressable>
+          ),
         }}
       />
     </Stack.Navigator>
-  );
-}
-
-const TripTab = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen 
-        name="行程標題" 
-        component={TripStack} 
-        options={{
-          headerShown: false,
-        }}
-        />
-    </Tab.Navigator>
   );
 }
 
