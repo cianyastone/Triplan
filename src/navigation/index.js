@@ -94,7 +94,7 @@ const HomeStack = ({ navigation: { goBack } }) => {
                 borderRadius={15} borderWidth={2} 
                 _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
               >
-                <Image size={28} source={require('../asset/back.png')}/>
+                <Image alt={"setting"} size={28} source={require('../asset/back.png')}/>
               </Box>
             </Pressable>
           ),
@@ -132,7 +132,7 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
                 borderRadius={15} borderWidth={2} 
                 _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
               >
-                <Image size={28} source={require('../asset/back.png')}/>
+                <Image alt={"back"} size={28} source={require('../asset/back.png')}/>
               </Box>
             </Pressable>
           ),
@@ -166,7 +166,7 @@ const UserStack = () => {
 function MyTabBar({ state, descriptors, navigation }) {
   const { colorMode } = useColorMode();
   return (
-<SafeAreaView forceInset={{ bottom: 'always' }} style={{ backgroundColor: colorMode == 'light' ? white : darkBlack, }}>
+  <SafeAreaView forceInset={{ bottom: 'always' }} style={{ backgroundColor: colorMode == 'light' ? white : darkBlack, }}>
     <Box _light={{ bg: white }} _dark={{ bg: darkBlack }}>
       <Box mt={3} h={60} w={340} alignSelf="center"
         borderRadius="10" borderWidth="1.5"
@@ -208,9 +208,9 @@ function MyTabBar({ state, descriptors, navigation }) {
                         _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
                         bg="#F9BC75" alignItems="center" justifyContent="center"
                       >
-                        <Image size={25} source={require('../asset/home_light.png')}/>
+                        <Image size={25} alt={"home"} source={require('../asset/home_light.png')}/>
                       </Box>
-                      :<Image size={25} source={require('../asset/home_light.png')}/>
+                      :<Image size={25} alt={"home"} source={require('../asset/home_light.png')}/>
                     )
                   }else if(route.name == "AddStack"){
                     return (
@@ -219,7 +219,7 @@ function MyTabBar({ state, descriptors, navigation }) {
                         _light={{ bg: blue, borderColor: darkBlack }} _dark={{ bg: blueGreen, borderColor: white }}
                         alignItems="center" justifyContent="center"
                       >
-                        <Image size={30} source={require('../asset/add_light.png')}/>
+                        <Image size={30} alt={"add"} source={require('../asset/add_light.png')}/>
                       </Box>
                   )
                   }else{
@@ -230,9 +230,9 @@ function MyTabBar({ state, descriptors, navigation }) {
                         _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
                         bg="#F9BC75" alignItems="center" justifyContent="center"
                       >
-                        <Image size={25} source={require('../asset/search_light.png')}/>
+                        <Image size={25} alt={"search"} source={require('../asset/search_light.png')}/>
                       </Box>
-                      :<Image size={25} source={require('../asset/search_light.png')}/>
+                      :<Image size={25} alt={"search"} source={require('../asset/search_light.png')}/>
                   )}
                 }
               }

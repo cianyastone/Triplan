@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
     <Box flex="1" alignSelf="center" _light={{ bg: white }} _dark={{ bg: darkBlack }} px={25}>
       <Flex direction="row" alignItems="center" py={2} justifyContent="space-between">
         <Flex direction="row" alignItems="center">
-          <Image borderRadius={100} size="50" source={require('../asset/userPhoto.png')}/>
+          <Image alt={"userPhoto"} borderRadius={100} size="50" source={require('../asset/userPhoto.png')}/>
           <Text fontSize="xl" ml={2}>Name</Text>
         </Flex>
         <Pressable onPress={Setting}>
@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
             borderRadius={20} borderWidth="1.5"
             _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
           >
-            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} source={{uri: recent.image}}/>
+            <Image alt={"recent"} position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} source={{uri: recent.image}}/>
             <Box position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={15} bg="rgba(29, 29, 29, 0.4)"/>
             <Flex h="100%" w="100%" p={5}
               direction="row" justifyContent="space-between"

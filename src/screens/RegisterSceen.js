@@ -20,7 +20,7 @@ const RegisterSceen = ({ navigation, navigation: { goBack } }) => {
         <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
             <ScrollView>
                 <Center mb={10} mt={100} >
-                    <Image size={125} source={require('../asset/logo.png')}
+                    <Image alt={"logo"} size={125} source={require('../asset/logo.png')}
                     borderRadius={15} borderWidth={1.5}
                     _light={{ borderColor: black }} _dark={{ borderColor: white }}
                     />

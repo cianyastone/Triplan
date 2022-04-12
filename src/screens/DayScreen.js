@@ -80,7 +80,7 @@ export default class  DayScreen extends Component {
           <Flex position="absolute" w={300} h={200} justifyContent="center"
             borderRadius={30} borderWidth="1.5" _light={{ borderColor: darkBlack,bg: white }} _dark={{ borderColor: white, bg: darkBlack }}
           >
-            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={25} source={require('../asset/map.png')}/>
+            <Image alt={"map"} position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={25} source={require('../asset/map.png')}/>
             <Box position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={25} borderWidth={1.5} />
           </Flex>
       </Box>

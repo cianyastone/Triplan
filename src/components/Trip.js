@@ -21,7 +21,7 @@ const UnfinishedTrip = ({ trip }) => {
                 borderRadius={15} borderWidth="1.5"
                 _light={{ bg: white, borderColor: black }} _dark={{ bg: darkBlack, borderColor: darkWhite }}
             >
-                <Image w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
+                <Image alt={"trip"} w={140} h={100} borderRadius={10} source={{uri: trip.image}}/>
                 <Flex direction="row" w="100%" justifyContent="space-between" p={2} alignItems="flex-end">
                     <Box>
                         <Text fontSize="md">{trip.title}</Text>

@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
         <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
             <ScrollView>
                 <Center mt={100} mb={10}>
-                    <Image size={125} source={require('../asset/logo.png')}
+                    <Image alt={"logo"} size={125} source={require('../asset/logo.png')}
                     borderRadius={15} borderWidth={1.5}
                     _light={{ borderColor: black }} _dark={{ borderColor: white }}
                     />

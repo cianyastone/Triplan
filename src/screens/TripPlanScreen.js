@@ -1,6 +1,6 @@
-import React , { useState, Component } from "react";
-import { Box, Input, ScrollView, Text, useColorMode } from "native-base";
-import { View, Image, useWindowDimensions, StyleSheet, Dimensions, Button  } from 'react-native';
+import React from "react";
+import { Box, useColorMode } from "native-base";
+import {  Dimensions  } from 'react-native';
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
@@ -15,9 +15,6 @@ const green="#7EBB94";
 const darkBlack="#262626";
 const darkWhite="#E4E4E4";
 
-const SecondRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-);
 
 const TripPlanScreen = () => {
   const { colorMode } = useColorMode();
