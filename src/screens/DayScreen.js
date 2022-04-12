@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import { Box, Input, ScrollView, Text } from "native-base";
-import { View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Box, Input, ScrollView, Text, Flex, Image } from "native-base";
+import { View, TouchableOpacity, TextInput } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import tripData from "../json/trip.json";
 
 
 const Goal_data = [
@@ -26,9 +27,6 @@ export default class  DayScreen extends Component {
 
   }
 
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
-  }
 
   onEnableScroll = (value) => {
     this.setState({
@@ -50,8 +48,8 @@ export default class  DayScreen extends Component {
   }
   render() {
   return(
-    <View style={{flex: 1, backgroundColor:'white' ,}}>
-      <View style={{
+    <Box flex="1" alignSelf="center" bg="#fff" px={25}>
+      {/* <View style={{
         justifyContent: "center",
         alignItems: "center",
         
@@ -63,14 +61,25 @@ export default class  DayScreen extends Component {
           width: 330,
         }}
         />
-      </View>
-      
+      </View> */}
+      <Box h={210} alignItems="center" mb={5}>
+          <Box mt={1.5} h={200} w={290}
+            borderRadius="25" borderWidth="1.5" borderColor="#1D1D1D"
+            bg="#2AB3C0"
+          />
+          <Flex position="absolute" bg="#fff" w={300} h={200} justifyContent="center"
+            borderRadius={30} borderWidth="1.5" borderColor="#1D1D1D"
+          >
+            <Image position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={25} source={require('../asset/map.png')}/>
+            <Box position="absolute" alignSelf="center" w="96%" h="93%" borderRadius={25} borderWidth={1.5} />
+          </Flex>
+      </Box>
       <ScrollView>
         <View style={{
         flexDirection: "row",
         justifyContent:'center',
        }}>
-              <View style={{width:300}}>
+              <View style={{width:310}}>
               
               <Box flexDir='row'>
                   <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
@@ -139,7 +148,7 @@ export default class  DayScreen extends Component {
             </ScrollView>
       
       
-    </View>
+    </Box>
   );}
 }
 
