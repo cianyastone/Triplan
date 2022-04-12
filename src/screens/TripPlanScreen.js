@@ -1,51 +1,62 @@
 import React , { useState, Component } from "react";
-import { Box, Input, ScrollView, Text } from "native-base";
+import { Box, Input, ScrollView, Text, useColorMode } from "native-base";
 import { View, Image, useWindowDimensions, StyleSheet, Dimensions, Button  } from 'react-native';
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
 import { Tab } from "react-native-elements";
 
-
-
-const FirstRoute = () => (
-  <View >  
-      <DayScreen />
-  </View>
-);
-  
+const black="#1D1D1D";
+const blueGreen="#2AB3C0";
+const blue = "#A8DEE0";
+const orange="#F9BC75";
+const white="#fff";
+const green="#7EBB94";
+const darkBlack="#262626";
+const darkWhite="#E4E4E4";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 );
 
-
-class TripPlanScreen extends Component {
-
+const TripPlanScreen = () => {
+  const { colorMode } = useColorMode();
   // layout = useWindowDimensions();
-  constructor(props) {
-    super(props)
-    this.state = {
-      index: 0,
-      routes: [
-        { key: 'first', title: '第一天' },
-        { key: 'second', title: '第二天' },
-        { key: 'third', title: '第三天' },
-      ]
-    }
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     index: 0,
+  //     routes: [
+  //       { key: 'first', title: '第一天' },
+  //       { key: 'second', title: '第二天' },
+  //       { key: 'third', title: '第三天' },
+  //     ]
+  //   }
+  // }
 
-  renderScene = SceneMap({
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([{
+    key: "first",
+    title: '第一天'
+  }, {
+    key: "second",
+    title: '第二天' 
+  }, {
+    key: "third",
+    title: '第三天'
+  }, ]);
+
+  const renderScene = SceneMap({
   first: DayScreen,
   second: DayScreen,
   third: DayScreen,
-})
-indexChangeHandler = (index) => {
-  this.setState({ index })
-}
-  render() {
+});
+const indexChangeHandler = {
+  width: Dimensions.get("window").width
+};
+
   return (
-    <View style={{flex: 1, backgroundColor:'white'}}>
+    <Box flex="1" _light={{ bg: white }} _dark={{ bg: darkBlack }}>
       {/* <View 
       style={{
         flexDirection: "row",
@@ -78,9 +89,9 @@ indexChangeHandler = (index) => {
         />
         </View> */}
       <TabView 
-      navigationState={this.state}
-      renderScene={this.renderScene}
-      onIndexChange={this.indexChangeHandler}
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
       initialLayout={
         {height: 0,
         width: Dimensions.get('window').width}
@@ -90,7 +101,7 @@ indexChangeHandler = (index) => {
           {...props}
           scrollEnabled 
           style={{
-            backgroundColor: 'white',
+            backgroundColor: colorMode == 'light' ? white : darkBlack,
             shadowOffset: { height: 0, width: 0 },
             shadowColor: "transparent",
             shadowOpacity: 0,
@@ -108,12 +119,12 @@ indexChangeHandler = (index) => {
           }}
           indicatorStyle={{
             height: 3,
-            backgroundColor: '#F9BC75',
+            backgroundColor: orange,
             width: 50, 
             left: 25
           }}
-          activeColor={'#F9BC75'}
-          inactiveColor={'#1D1D1D'}
+          activeColor={orange}
+          inactiveColor={colorMode == 'light' ? black : darkWhite}
           indicatorContainerStyle={{
             width: Dimensions.get("screen").width
           }}
@@ -132,8 +143,8 @@ indexChangeHandler = (index) => {
       /> 
       
 
-    </View>
-  );}
+    </Box>
+  );
 };
 
 export default TripPlanScreen;

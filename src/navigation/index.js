@@ -105,6 +105,7 @@ const HomeStack = ({ navigation: { goBack } }) => {
 }
 
 const TripStack = ({ navigation: { goBack }, navigation }) => {
+  const { colorMode } = useColorMode();
   return (
     <Stack.Navigator>
       <Stack.Screen 
@@ -112,14 +113,20 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
         component={TripPlanScreen} 
         options={{
           headerTitle: "行程",
+          headerTintColor: colorMode == 'light' ? black : white,
           headerTitleStyle: {
             fontSize: 20,
-            color: "black",
+            backgroundColor: colorMode == 'light' ? white : darkBlack,
           },
+          headerStyle: {
+            backgroundColor: colorMode == 'light' ? white : darkBlack,
+          },
+          headerShadowVisible: false,
           headerLeft: () => (
             <Pressable ml={6}onPress={() => goBack()}>
               <Box size={38} bg="#F9BC75" justifyContent="center" alignItems="center"
-                borderRadius={15} borderWidth={2} borderColor="#1D1D1D"
+                borderRadius={15} borderWidth={2} 
+                _light={{ borderColor: darkBlack }} _dark={{ borderColor: white }}
               >
                 <Image size={28} source={require('../asset/back.png')}/>
               </Box>
