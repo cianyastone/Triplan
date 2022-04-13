@@ -4,7 +4,6 @@ import {  Dimensions  } from 'react-native';
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
-import { Tab } from "react-native-elements";
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";

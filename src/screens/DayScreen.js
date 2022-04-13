@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import { Box, Input, ScrollView, Text, Flex, Image, useColorMode } from "native-base";
-import { View, TouchableOpacity, TextInput } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import tripData from "../json/trip.json";
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";
@@ -85,11 +84,8 @@ export default class  DayScreen extends Component {
           </Flex>
       </Box>
       <ScrollView>
-        <View style={{
-        flexDirection: "row",
-        justifyContent:'center',
-       }}>
-              <View style={{width:310}}>
+        <Box flexDirection= "row" justifyContent='center'>
+              <Box width={310}>
               
               {/* <Box flexDir='row'>
                   <Box mr={10} mt={10} height={5} width={5} borderRadius={20} 
@@ -116,11 +112,17 @@ export default class  DayScreen extends Component {
                               borderRadius="30" borderWidth="1.5" _light={{ borderColor: darkBlack,bg: lightBlue }} _dark={{ borderColor: white, bg: darkBlack }}
                               alignSelf="center"
                           />
-                          <Box position='absolute' h={90} w={240} 
+                          <Box position='absolute' h={90} w={240} flexDirection="row"
                               borderRadius="30" borderWidth="1.5" _light={{ borderColor: darkBlack,bg: white }} _dark={{ borderColor: white, bg: darkBlack }}
                           >
+                          <Box>
                           <Input h={17} size="md" mt={25} ml={30} variant="unstyled">第 {index+1} 個行程</Input>
                           <Input h={17} size="sm" mt={2} ml={30} variant="unstyled">地址</Input>
+                          </Box>
+                          <Box ml={59} mt={5}>
+                          <Input h={15} fontSize={12} mb={4} variant="unstyled">時間</Input>
+                          <Input h={15} fontSize={12} variant="unstyled">時間</Input>
+                          </Box>
                           {/* <DateTimePicker
                           mode="time"
                           value={new Date(12,00)}
@@ -157,8 +159,8 @@ export default class  DayScreen extends Component {
                 </Box>
                 </Box>
               {/* </Box> */}
-              </View>
-              </View>
+              </Box>
+              </Box>
             </ScrollView>
       
       
