@@ -66,7 +66,7 @@ class SearchFunction extends Component {
                     />
                     <Input position='absolute' w={300} onChangeText={text => this.searchItems(text)} placeholder="在這裡搜尋" variant="unstyled"/>
                 </Box>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <FlatList
                         numColumns={2}
                         data={this.state.data}

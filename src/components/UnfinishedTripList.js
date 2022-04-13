@@ -10,14 +10,13 @@ const UnfinishedTripList = ({ list }) => {
   sort.shift();
 
   return (
-    <Box>
-      <FlatList
-        data={sort}
-        renderItem={renderItem}
-        horizontal={true}
-        keyExtractor={item => item.title}
-      />
-    </Box>
+    <FlatList
+      showsHorizontalScrollIndicator={false}
+      data={sort}
+      renderItem={renderItem}
+      horizontal={true}
+      keyExtractor={item => item.title}
+    />
   );
 }
 export default UnfinishedTripList;

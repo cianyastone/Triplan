@@ -40,7 +40,9 @@ const Home = ({ navigation }) => {
         </Pressable>
       </Flex>
 
-      <ScrollView>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+      >
         <Text fontSize="sm" m={3}>即將進行的行程</Text>
         <Box h={220} alignItems="center" mb={30}>
           <Box mt={2} h={210} w={320}
