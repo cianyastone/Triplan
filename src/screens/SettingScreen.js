@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Box, Heading, VStack, Button, Image, Pressable, Switch, useColorMode, Flex } from "native-base";
 import { useDispatch } from "react-redux";
-import { logout } from "../redux/actions/actions";
+import { signOut } from "../redux/accountSlice"
 
 const Setting = () => {
     const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Setting = () => {
                     />
                 </Flex>
             </Box>
-            <Pressable mt={4} alignItems="center" onPress={() => dispatch(logout())}>
+            <Pressable mt={4} alignItems="center" onPress={() => dispatch(signOut())}>
                 <Box mt={2} h={55} w={310} 
                     borderRadius="20" borderWidth="1.5" borderColor={black}
                     _light={{ bg: blue, borderColor: black }} _dark={{ bg: darkBlack, borderColor: white }}

@@ -2,26 +2,27 @@ import { useState } from "react";
 import {
   ScrollView,
   Box,
+  Flex,
   FormControl,
   Heading,
   useColorMode,
-  Flex,
   VStack,
   Text,
   Input,
+  Pressable,
   Divider,
   Center,
   Image,
-  Pressable,
 } from "native-base";
 import { useDispatch } from "react-redux";
-import { gotoRegister, loginAsync } from "../redux/accountSlice";
+import { gotoLogin, registerAsync } from "../redux/accountSlice";
 
-const Login = () => {
+const RegisterScreen = () => {
   const dispatch = useDispatch();
   const [loginRequest, setLoginRequest] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const { colorMode } = useColorMode();
   const focusInputStyle = {
@@ -35,19 +36,19 @@ const Login = () => {
   const green = "#7EBB94";
   const darkBlack = "#262626";
 
-  const onSignIn = () => {
-    dispatch(loginAsync({ email, password }));
+  const onSignUp = () => {
+    dispatch(registerAsync({ name, email, password }));
     setLoginRequest(!loginRequest);
   };
 
-  const goToRegister = () => {
-    dispatch(gotoRegister());
+  const goToLogin = () => {
+    dispatch(gotoLogin());
   };
 
   return (
     <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
       <ScrollView>
-        <Center mt={100} mb={10}>
+        <Center mb={10} mt={100}>
           <Image
             alt={"logo"}
             size={125}
@@ -59,6 +60,50 @@ const Login = () => {
           />
         </Center>
         <VStack alignItems="center" mb={20}>
+          <FormControl
+            mb={15}
+            isRequired
+            h={69}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box
+              mr={230}
+              h={25}
+              w={55}
+              zIndex={1}
+              alignItems="center"
+              _light={{ bg: white }}
+              _dark={{ bg: darkBlack }}
+            >
+              <Text>Name</Text>
+            </Box>
+            <Box
+              h={44}
+              w={310}
+              borderRadius="20"
+              borderWidth="1.5"
+              _light={{ bg: blueGreen, borderColor: black }}
+              _dark={{ bg: darkBlack, borderColor: white }}
+            />
+            <Box
+              position="absolute"
+              h={55}
+              w={320}
+              borderRadius="15"
+              borderWidth="1.5"
+              _light={{ bg: white, borderColor: black }}
+              _dark={{ bg: darkBlack, borderColor: white }}
+            />
+            <Input
+              position="absolute"
+              w={310}
+              _focus={focusInputStyle}
+              variant="unstyled"
+              autoCapitalize="none"
+              onChangeText={(text) => setName(text)}
+            />
+          </FormControl>
           <FormControl
             mb={15}
             isRequired
@@ -100,7 +145,7 @@ const Login = () => {
               _focus={focusInputStyle}
               variant="unstyled"
               autoCapitalize="none"
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={(text) => setEmail(text)}
             />
           </FormControl>
           <FormControl
@@ -111,13 +156,13 @@ const Login = () => {
             alignItems="center"
           >
             <Box
-              _light={{ bg: white }}
-              _dark={{ bg: darkBlack }}
               mr={200}
               h={25}
               w={86}
               zIndex={1}
               alignItems="center"
+              _light={{ bg: white }}
+              _dark={{ bg: darkBlack }}
             >
               <Text>Password</Text>
             </Box>
@@ -145,10 +190,10 @@ const Login = () => {
               _focus={focusInputStyle}
               variant="unstyled"
               autoCapitalize="none"
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(text) => setPassword(text)}
             />
           </FormControl>
-          <Pressable alignItems="center" onPress={onSignIn}>
+          <Pressable alignItems="center" onPress={onSignUp}>
             <Box
               mt={2}
               h={55}
@@ -175,11 +220,11 @@ const Login = () => {
               _dark={{ color: black }}
               fontSize="md"
             >
-              登入
+              註冊
             </Heading>
           </Pressable>
           <Flex
-            mt={105}
+            mt={21}
             mb={19}
             w="100%"
             direction="row"
@@ -202,7 +247,7 @@ const Login = () => {
               _dark={{ bg: white }}
             />
           </Flex>
-          <Pressable alignItems="center" onPress={goToRegister}>
+          <Pressable alignItems="center" onPress={goToLogin}>
             <Box
               mt={2}
               h={55}
@@ -229,7 +274,7 @@ const Login = () => {
               _dark={{ color: black }}
               fontSize="md"
             >
-              點此註冊
+              點此登入
             </Heading>
           </Pressable>
         </VStack>
@@ -238,4 +283,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default RegisterScreen;
