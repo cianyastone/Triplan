@@ -52,10 +52,9 @@ const ProfileScreen = ({ navigation }) => {
           justifyContent="center"
           w={102}
           h={102}
-          borderWidth="1.5"
+          backgroundColor={white}
           borderRadius={21}
-          _light={{ borderColor: black }}
-          _dark={{ borderColor: white }}
+          shadow="3"
         >
           <Box
             w={94}

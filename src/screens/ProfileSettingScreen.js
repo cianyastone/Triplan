@@ -90,10 +90,9 @@ const ProfileSettingScreen = () => {
           <Box
             w={102}
             h={102}
-            borderWidth="1.5"
+            backgroundColor={white}
             borderRadius={21}
-            _light={{ borderColor: black }}
-            _dark={{ borderColor: white }}
+            shadow="3"
           />
           <Box
             w={94}
@@ -235,7 +234,7 @@ const ProfileSettingScreen = () => {
             </Box>
           </Flex>
         </Box>
-        <Box alignItems="center" mb={19}>
+        <Box alignItems="center" mb={47}>
           <Box
             h={55}
             w={310}
@@ -272,7 +271,7 @@ const ProfileSettingScreen = () => {
                   items={items}
                   IconRenderer={MaterialIcons}
                   uniqueKey="name"
-                  selectText="旅行型態"
+                  selectText="旅行風格"
                   showDropDowns={false}
                   readOnlyHeadings={false}
                   onSelectedItemsChange={(selectedItems) => {
