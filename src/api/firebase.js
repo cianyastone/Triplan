@@ -5,7 +5,13 @@ import {
   createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+  getBlob,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -26,27 +32,28 @@ const firebaseConfig = {
 
 const app_length = getApps().length > 0;
 
-// Initialize Firebase
 const app = app_length ? getApp() : initializeApp(firebaseConfig);
 
-//REFERENCE AUTH
 const auth = app_length
   ? getAuth(app)
   : initializeAuth(app, {
       persistence: getReactNativePersistence(AsyncStorage),
     });
-
-// REFERENCE DB
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export const login = async ({ email, password }) => {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  const user = userCredential.user;
-  return user;
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const register = async ({ name, email, password }) => {
@@ -60,10 +67,11 @@ export const register = async ({ name, email, password }) => {
     await setDoc(doc(db, "users", user.uid), {
       name,
       email: email,
+      country: "",
+      style: [],
     });
     return user;
   } catch (e) {
-    console.log("error ...");
     console.log(e);
   }
 };
@@ -89,6 +97,13 @@ export const readUser = async () => {
   }
 };
 
+export const readUserPhoto = async () => {
+  const { uid } = auth.currentUser;
+  const storageRef = ref(storage, "/profilePicture/" + uid);
+
+  return await getDownloadURL(storageRef);
+};
+
 export const updateUser = async (userInfo) => {
   const { uid } = auth.currentUser;
   try {
@@ -96,6 +111,32 @@ export const updateUser = async (userInfo) => {
     await setDoc(docRef, userInfo);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateUserPhoto = async (userPhoto) => {
+  const { uid } = auth.currentUser;
+  try {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        console.log(e);
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", userPhoto.image.uri, true);
+      xhr.send(null);
+    });
+    const storageRef = ref(storage, "/profilePicture/" + uid);
+
+    await uploadBytesResumable(storageRef, blob);
+
+    blob.close();
   } catch (e) {
     console.log(e);
   }

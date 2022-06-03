@@ -13,12 +13,11 @@ import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import SafeAreaView from "react-native-safe-area-view";
-import Home from "../screens/HomeScreen";
 import AuthScreen from "../screens/AuthScreen";
 import { selectLogin } from "../redux/accountSlice";
 import TripPlanScreen from "../screens/TripPlanScreen";
-import Setting from "../screens/SettingScreen";
 import Search from "../screens/SearchScreen";
+import { HomeStack } from "./HomeStack";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -68,57 +67,6 @@ const MyTabs = () => {
       />
       <Tab.Screen name="SearchStack" component={Search} />
     </Tab.Navigator>
-  );
-};
-
-const HomeStack = ({ navigation: { goBack } }) => {
-  const { colorMode } = useColorMode();
-  const { colors } = useTheme();
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name=" "
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Setting"
-        component={Setting}
-        options={{
-          title: "設定",
-          headerTitleStyle: {
-            fontSize: 16,
-          },
-          headerTintColor: colorMode == "light" ? black : white,
-          headerLeft: () => (
-            <Pressable ml={6} onPress={() => goBack()}>
-              <Box
-                size={38}
-                bg="#F9BC75"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius={15}
-                borderWidth={2}
-                _light={{ borderColor: darkBlack }}
-                _dark={{ borderColor: white }}
-              >
-                <Image
-                  alt={"setting"}
-                  size={28}
-                  source={require("../asset/back.png")}
-                />
-              </Box>
-            </Pressable>
-          ),
-          headerStyle: {
-            backgroundColor: colorMode == "light" ? white : darkBlack,
-          },
-          headerShadowVisible: false,
-        }}
-      />
-    </Stack.Navigator>
   );
 };
 

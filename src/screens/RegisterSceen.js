@@ -14,6 +14,7 @@ import {
   Center,
   Image,
 } from "native-base";
+import Feather from "react-native-vector-icons/Feather";
 import { useDispatch } from "react-redux";
 import { gotoLogin, registerAsync } from "../redux/accountSlice";
 
@@ -35,6 +36,7 @@ const RegisterScreen = () => {
   const white = "#fff";
   const green = "#7EBB94";
   const darkBlack = "#262626";
+  const darkWhite = "#E4E4E4";
 
   const onSignUp = () => {
     dispatch(registerAsync({ name, email, password }));
@@ -60,26 +62,9 @@ const RegisterScreen = () => {
           />
         </Center>
         <VStack alignItems="center" mb={20}>
-          <FormControl
-            mb={15}
-            isRequired
-            h={69}
-            justifyContent="center"
-            alignItems="center"
-          >
+          <FormControl mb={19} isRequired h={55} alignItems="center">
             <Box
-              mr={230}
-              h={25}
-              w={55}
-              zIndex={1}
-              alignItems="center"
-              _light={{ bg: white }}
-              _dark={{ bg: darkBlack }}
-            >
-              <Text>Name</Text>
-            </Box>
-            <Box
-              h={44}
+              h={55}
               w={310}
               borderRadius="20"
               borderWidth="1.5"
@@ -88,42 +73,38 @@ const RegisterScreen = () => {
             />
             <Box
               position="absolute"
-              h={55}
+              h={50}
               w={320}
               borderRadius="15"
               borderWidth="1.5"
               _light={{ bg: white, borderColor: black }}
               _dark={{ bg: darkBlack, borderColor: white }}
             />
-            <Input
+            <Flex
+              direction="row"
               position="absolute"
-              w={310}
-              _focus={focusInputStyle}
-              variant="unstyled"
-              autoCapitalize="none"
-              onChangeText={(text) => setName(text)}
-            />
+              w={300}
+              h={50}
+              alignItems="center"
+            >
+              <Feather
+                name="user"
+                size={25}
+                color={colorMode == "light" ? black : darkWhite}
+              />
+              <Input
+                w={275}
+                _focus={focusInputStyle}
+                variant="unstyled"
+                autoCapitalize="none"
+                onChangeText={(name) => setName(name)}
+                placeholder={"Name"}
+              />
+            </Flex>
           </FormControl>
-          <FormControl
-            mb={15}
-            isRequired
-            h={69}
-            justifyContent="center"
-            alignItems="center"
-          >
+          <FormControl mb={19} isRequired h={55} alignItems="center">
             <Box
-              mr={230}
-              h={25}
-              w={55}
-              zIndex={1}
-              alignItems="center"
-              _light={{ bg: white }}
-              _dark={{ bg: darkBlack }}
-            >
-              <Text>Email</Text>
-            </Box>
-            <Box
-              h={44}
+              h={55}
               w={310}
               borderRadius="20"
               borderWidth="1.5"
@@ -132,42 +113,38 @@ const RegisterScreen = () => {
             />
             <Box
               position="absolute"
-              h={55}
+              h={50}
               w={320}
               borderRadius="15"
               borderWidth="1.5"
               _light={{ bg: white, borderColor: black }}
               _dark={{ bg: darkBlack, borderColor: white }}
             />
-            <Input
+            <Flex
+              direction="row"
               position="absolute"
-              w={310}
-              _focus={focusInputStyle}
-              variant="unstyled"
-              autoCapitalize="none"
-              onChangeText={(text) => setEmail(text)}
-            />
+              w={300}
+              h={50}
+              alignItems="center"
+            >
+              <Feather
+                name="mail"
+                size={25}
+                color={colorMode == "light" ? black : darkWhite}
+              />
+              <Input
+                w={275}
+                _focus={focusInputStyle}
+                variant="unstyled"
+                autoCapitalize="none"
+                onChangeText={(email) => setEmail(email)}
+                placeholder={"Email"}
+              />
+            </Flex>
           </FormControl>
-          <FormControl
-            mb={15}
-            isRequired
-            h={69}
-            justifyContent="center"
-            alignItems="center"
-          >
+          <FormControl mb={39} isRequired h={55} alignItems="center">
             <Box
-              mr={200}
-              h={25}
-              w={86}
-              zIndex={1}
-              alignItems="center"
-              _light={{ bg: white }}
-              _dark={{ bg: darkBlack }}
-            >
-              <Text>Password</Text>
-            </Box>
-            <Box
-              h={44}
+              h={55}
               w={310}
               borderRadius="20"
               borderWidth="1.5"
@@ -176,28 +153,40 @@ const RegisterScreen = () => {
             />
             <Box
               position="absolute"
-              h={55}
+              h={50}
               w={320}
               borderRadius="15"
               borderWidth="1.5"
               _light={{ bg: white, borderColor: black }}
               _dark={{ bg: darkBlack, borderColor: white }}
             />
-            <Input
-              type="password"
+            <Flex
+              direction="row"
               position="absolute"
-              w={310}
-              _focus={focusInputStyle}
-              variant="unstyled"
-              autoCapitalize="none"
-              onChangeText={(text) => setPassword(text)}
-            />
+              w={300}
+              h={50}
+              alignItems="center"
+            >
+              <Feather
+                name="lock"
+                size={25}
+                color={colorMode == "light" ? black : darkWhite}
+              />
+              <Input
+                w={275}
+                _focus={focusInputStyle}
+                type="password"
+                variant="unstyled"
+                autoCapitalize="none"
+                onChangeText={(password) => setPassword(password)}
+                placeholder={"Password"}
+              />
+            </Flex>
           </FormControl>
           <Pressable alignItems="center" onPress={onSignUp}>
             <Box
-              mt={2}
               h={55}
-              w={310}
+              w={238}
               borderRadius="20"
               borderWidth="1.5"
               _light={{ bg: blueGreen, borderColor: black }}
@@ -205,8 +194,8 @@ const RegisterScreen = () => {
             />
             <Box
               position="absolute"
-              h={55}
-              w={320}
+              h={50}
+              w={245}
               borderRadius="15"
               borderWidth="1.5"
               _light={{ borderColor: black }}
@@ -215,7 +204,7 @@ const RegisterScreen = () => {
             />
             <Heading
               position="absolute"
-              mt={4}
+              mt={15}
               _light={{ color: white }}
               _dark={{ color: black }}
               fontSize="md"
@@ -224,7 +213,7 @@ const RegisterScreen = () => {
             </Heading>
           </Pressable>
           <Flex
-            mt={21}
+            mt={23}
             mb={19}
             w="100%"
             direction="row"
@@ -249,9 +238,8 @@ const RegisterScreen = () => {
           </Flex>
           <Pressable alignItems="center" onPress={goToLogin}>
             <Box
-              mt={2}
               h={55}
-              w={310}
+              w={238}
               borderRadius="20"
               borderWidth="1.5"
               _light={{ bg: blueGreen, borderColor: black }}
@@ -259,8 +247,8 @@ const RegisterScreen = () => {
             />
             <Box
               position="absolute"
-              h={55}
-              w={320}
+              h={50}
+              w={245}
               borderRadius="15"
               borderWidth="1.5"
               _light={{ borderColor: black }}
@@ -269,7 +257,7 @@ const RegisterScreen = () => {
             />
             <Heading
               position="absolute"
-              mt={4}
+              mt={15}
               _light={{ color: white }}
               _dark={{ color: black }}
               fontSize="md"
