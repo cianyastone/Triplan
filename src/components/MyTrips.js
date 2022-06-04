@@ -30,15 +30,15 @@ const MyTrips = () => {
   const darkBlack = "#262626";
   const darkWhite = "#E4E4E4";
 
-  const currentTime = new Date().toISOString();
-  const unfinished = datas.filter((x) => x.date > currentTime);
-  const finished = datas.filter((x) => x.date < currentTime);
-  const sort = unfinished.sort((a, b) => a.date.localeCompare(b.date));
-  const recent = sort[0];
-
   useEffect(() => {
     dispatch(readTripAsync());
   }, []);
+
+  const currentTime = new Date().toISOString();
+  // const unfinished = datas.filter((x) => x.date > currentTime);
+  // const finished = datas.filter((x) => x.date < currentTime);
+  // const sort = unfinished.sort((a, b) => a.date.localeCompare(b.date));
+  // const recent = sort[0];
 
   return (
     <Box pb={85}>
@@ -113,11 +113,11 @@ const MyTrips = () => {
       <Text fontSize="sm" m={3}>
         未完成的行程
       </Text>
-      <TripList list={unfinished} />
+      <TripList list={datas} />
       <Text fontSize="sm" m={3}>
         已完成的行程
       </Text>
-      <TripList list={finished} />
+      <TripList list={datas} />
     </Box>
   );
 };
