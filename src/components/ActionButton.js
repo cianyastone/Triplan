@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Actionsheet, useDisclose, Image, Center, Text, useColorMode } from 'native-base';
+import { Pressable, Actionsheet, useDisclose, Center, Text, useColorMode } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 
 export default () => {

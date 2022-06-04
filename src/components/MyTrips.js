@@ -1,8 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Feather from "react-native-vector-icons/Feather";
-
 import {
   ScrollView,
   Text,
@@ -13,15 +11,13 @@ import {
   Pressable,
   useColorMode,
 } from "native-base";
-import tripData from "../json/trip.json";
 import moment from "moment";
-import UnfinishedTripList from "./UnfinishedTripList";
-import FinishedTripList from "./FinishedTripList";
+import TripList from "./TripList";
 import ActionButton from "./ActionButtonTop";
-import { selectGeneral, readUserAsync } from "../redux/accountSlice";
+import { readTripAsync, selectData } from "../redux/TripSlice";
 
-const MyTrips = ({ navigation }) => {
-  const general = useSelector(selectGeneral);
+const MyTrips = () => {
+  const datas = useSelector(selectData);
 
   const dispatch = useDispatch();
 
@@ -35,17 +31,18 @@ const MyTrips = ({ navigation }) => {
   const darkWhite = "#E4E4E4";
 
   const currentTime = new Date().toISOString();
-  const unfinished = tripData.TripList.filter((x) => x.date > currentTime);
+  const unfinished = datas.filter((x) => x.date > currentTime);
+  const finished = datas.filter((x) => x.date < currentTime);
   const sort = unfinished.sort((a, b) => a.date.localeCompare(b.date));
   const recent = sort[0];
 
   useEffect(() => {
-    dispatch(readUserAsync());
+    dispatch(readTripAsync());
   }, []);
 
   return (
-    <Box>
-      <Text fontSize="sm" m={3}>
+    <Box pb={85}>
+      {/* <Text fontSize="sm" m={3}>
         即將進行的行程
       </Text>
       <Box h={218} alignItems="center" mb={30}>
@@ -68,7 +65,7 @@ const MyTrips = ({ navigation }) => {
           _dark={{ bg: darkBlack, borderColor: darkWhite }}
         >
           <Image
-            alt={"recent"}
+            alt="recent"
             position="absolute"
             alignSelf="center"
             w="96%"
@@ -93,7 +90,7 @@ const MyTrips = ({ navigation }) => {
           >
             <Box mt={90}>
               <Heading color={white} size="lg">
-                {recent.title}
+                {recent.name}
               </Heading>
               <Text color={white} fontSize="md">
                 {moment(recent.date).format("DD")},{" "}
@@ -112,15 +109,15 @@ const MyTrips = ({ navigation }) => {
             <ActionButton />
           </Flex>
         </Flex>
-      </Box>
+      </Box> */}
       <Text fontSize="sm" m={3}>
         未完成的行程
       </Text>
-      <UnfinishedTripList list={tripData.TripList} />
+      <TripList list={unfinished} />
       <Text fontSize="sm" m={3}>
         已完成的行程
       </Text>
-      <FinishedTripList list={tripData.TripList} />
+      <TripList list={finished} />
     </Box>
   );
 };

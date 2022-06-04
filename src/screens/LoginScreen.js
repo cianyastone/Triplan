@@ -51,7 +51,7 @@ const Login = () => {
       <ScrollView>
         <Center mt={100} mb={10}>
           <Image
-            alt={"logo"}
+            alt="logo"
             size={125}
             source={require("../asset/logo.png")}
             borderRadius={15}

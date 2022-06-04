@@ -4,19 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Feather from "react-native-vector-icons/Feather";
 
 import {
-  ScrollView,
-  Text,
-  Heading,
   Box,
-  Image,
-  Flex,
-  Pressable,
   useColorMode,
 } from "native-base";
 import tripData from "../json/trip.json";
 import moment from "moment";
 import UnfinishedTripList from "./UnfinishedTripList";
-import FinishedTripList from "./FinishedTripList";
 import ActionButton from "./ActionButtonTop";
 import SafeAreaView from "react-native-safe-area-view";
 import { selectGeneral, readUserAsync } from "../redux/accountSlice";

@@ -4,27 +4,16 @@ import {
   Box,
   Heading,
   VStack,
-  Button,
   Image,
   Pressable,
-  Switch,
-  FormControl,
   useColorMode,
   Flex,
-  Select,
-  Input,
 } from "native-base";
-import { StyleSheet } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import SectionedMultiSelect from "react-native-sectioned-multi-select";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectGeneral,
-  readUserAsync,
-  updateUserAsync,
-} from "../redux/accountSlice";
+import { selectGeneral, readUserAsync } from "../redux/accountSlice";
 
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();

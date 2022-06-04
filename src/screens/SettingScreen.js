@@ -9,6 +9,7 @@ import {
   useColorMode,
   Flex,
 } from "native-base";
+import Feather from "react-native-vector-icons/Feather";
 import { useDispatch } from "react-redux";
 import { signOut } from "../redux/accountSlice";
 
@@ -53,7 +54,16 @@ const Setting = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text fontSize="md">夜間模式</Text>
+            <Flex direction="row" alignItems="center">
+              <Feather
+                name="sun"
+                size={30}
+                color={colorMode == "light" ? black : darkWhite}
+              />
+              <Text fontSize="md" pl={11}>
+                夜間模式
+              </Text>
+            </Flex>
             <Switch
               name="light Mode"
               isChecked={colorMode === "dark"}

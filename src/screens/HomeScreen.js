@@ -6,6 +6,7 @@ import Feather from "react-native-vector-icons/Feather";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import MyTrips from "../components/MyTrips";
 import CollectTrips from "../components/CollectTrips";
+import TestUpload from "../components/TestUpload";
 
 import {
   ScrollView,
@@ -37,13 +38,14 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(readUserAsync());
+    console.log(general.imageUrl);
   }, []);
 
   const SegmentedContent = () => {
     if (selectedIndex == 0) {
-      return <Box />;
+      return <MyTrips />;
     } else {
-      return <Box />;
+      return <TestUpload />;
     }
   };
 
@@ -77,13 +79,15 @@ const Home = ({ navigation }) => {
                 shadow="3"
               >
                 <Feather name="user" size={44} color={white} />
+                <Image
+                  alt=""
+                  position="absolute"
+                  borderRadius={25}
+                  size="44"
+                  source={{ uri: general.imageUrl }}
+                />
               </Box>
-              <Image
-                position="absolute"
-                borderRadius={25}
-                size="44"
-                source={{ uri: general.imageUrl }}
-              />
+
               <Text fontSize="xl" ml={2}>
                 {general.name}
               </Text>

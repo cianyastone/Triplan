@@ -12,7 +12,15 @@ import {
   getBlob,
   uploadBytesResumable,
 } from "firebase/storage";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  addDoc,
+  collection,
+} from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
@@ -137,6 +145,39 @@ export const updateUserPhoto = async (userPhoto) => {
     await uploadBytesResumable(storageRef, blob);
 
     blob.close();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const uploadTrip = async ({ name, days, date, image }) => {
+  const { uid } = auth.currentUser;
+  try {
+    const docRef = await addDoc(collection(db, "/users/" + uid + "/trip"), {
+      name,
+      days,
+      date,
+      image,
+    });
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const readTrip = async () => {
+  const { uid } = auth.currentUser;
+
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, "/users/" + uid + "/trip")
+    );
+    var datas = [];
+    querySnapshot.forEach((doc) => {
+      datas.push(doc.data());
+    });
+    return datas;
   } catch (e) {
     console.log(e);
   }

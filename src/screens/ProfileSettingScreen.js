@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Text,
   Box,
   Heading,
   VStack,
@@ -35,6 +34,7 @@ const ProfileSettingScreen = () => {
   const [imageUrl, setUrl] = useState();
 
   const { colorMode } = useColorMode();
+
   const black = "#1D1D1D";
   const blueGreen = "#2AB3C0";
   const orange = "#F9BC75";
@@ -340,42 +340,22 @@ const ProfileSettingScreen = () => {
 };
 
 const items = [
-  {
-    name: "文化",
-  },
-  {
-    name: "學習",
-  },
-  {
-    name: "冒險",
-  },
-  {
-    name: "藝術",
-  },
-  {
-    name: "自然",
-  },
-  {
-    name: "建築",
-  },
-  {
-    name: "奢華",
-  },
-  {
-    name: "音樂",
-  },
+  { name: "文化" },
+  { name: "學習" },
+  { name: "冒險" },
+  { name: "藝術" },
+  { name: "自然" },
+  { name: "建築" },
+  { name: "奢華" },
+  { name: "音樂" },
 ];
 
 const countryItems = [
-  {
-    name: "台灣",
-  },
-  {
-    name: "美國",
-  },
-  {
-    name: "日本",
-  },
+  { name: "台灣" },
+  { name: "日本" },
+  { name: "韓國" },
+  { name: "美國" },
+  { name: "英國" },
 ];
 
 export default ProfileSettingScreen;
