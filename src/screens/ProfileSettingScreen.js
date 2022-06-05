@@ -159,7 +159,7 @@ const ProfileSettingScreen = () => {
               size="lg"
               autoCapitalize="none"
               onChangeText={(name) => setName(name)}
-              placeholder={"Name"}
+              placeholder={"暱稱"}
             />
           </Flex>
         </FormControl>

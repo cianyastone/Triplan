@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ScrollView,
   Box,
@@ -15,14 +15,34 @@ import {
   Pressable,
 } from "native-base";
 import Feather from "react-native-vector-icons/Feather";
-import { useDispatch } from "react-redux";
-import { gotoRegister, loginAsync } from "../redux/accountSlice"
+import { useDispatch, useSelector } from "react-redux";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  Easing,
+} from "react-native-reanimated";
+import { StyleSheet } from "react-native";
+import { gotoRegister, loginAsync, selectStatus } from "../redux/accountSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [loginRequest, setLoginRequest] = useState(false);
+  const loginStatus = useSelector(selectStatus);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const rotation = useSharedValue(0);
+
+  const animatedSpinnerStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          rotateZ: `${rotation.value}deg`,
+        },
+      ],
+    };
+  }, [rotation.value]);
 
   const { colorMode } = useColorMode();
   const focusInputStyle = {
@@ -38,13 +58,29 @@ const Login = () => {
   const darkWhite = "#E4E4E4";
 
   const onSignIn = () => {
-    dispatch(loginAsync({ email, password }))
-    setLoginRequest(!loginRequest);
- }
+    dispatch(loginAsync({ email, password }));
+  };
 
- const goToRegister = () => {
-    dispatch(gotoRegister())
- }
+  const goToRegister = () => {
+    dispatch(gotoRegister());
+  };
+
+  useEffect(() => {
+    if (loginStatus == "error") {
+      rotation.value = withTiming(0, {
+        duration: 1000,
+        easing: Easing.linear,
+      });
+    } else if (loginStatus == "loading") {
+      rotation.value = withRepeat(
+        withTiming(360, {
+          duration: 1000,
+          easing: Easing.linear,
+        }),
+        -1
+      );
+    }
+  }, [loginStatus]);
 
   return (
     <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
@@ -168,7 +204,13 @@ const Login = () => {
               _dark={{ color: black }}
               fontSize="md"
             >
-              登入
+              {loginStatus == "loading" ? (
+                <Animated.View
+                  style={[styles.spinner, animatedSpinnerStyles]}
+                />
+              ) : (
+                "登入"
+              )}
             </Heading>
           </Pressable>
           <Flex
@@ -229,5 +271,18 @@ const Login = () => {
     </Box>
   );
 };
+
+const styles = StyleSheet.create({
+  spinner: {
+    height: 20,
+    width: 20,
+    borderRadius: 30,
+    borderWidth: 4,
+    borderTopColor: "#f5f5f5",
+    borderRightColor: "#f5f5f5",
+    borderBottomColor: "lightblue",
+    borderLeftColor: "lightblue",
+  },
+});
 
 export default Login;

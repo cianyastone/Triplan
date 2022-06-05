@@ -31,6 +31,9 @@ const tripSlice = createSlice({
         state.status = "idle";
         state.data = action.payload;
       })
+      .addCase(readTripAsync.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(readTripAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.data = action.payload;
@@ -39,6 +42,7 @@ const tripSlice = createSlice({
 });
 
 export const selectData = (state) => state.trip.data;
+export const selectStatus = (state) => state.trip.status;
 
 export { uploadTripAsync, readTripAsync };
 

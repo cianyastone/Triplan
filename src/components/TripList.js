@@ -4,10 +4,6 @@ import Trip from "./Trip";
 
 const TripList = ({ list }) => {
   const renderItem = ({ item }) => <Trip trip={item}/>;
-  // const currentTime = new Date().toISOString();
-  // const unfinished = list.filter((x) => x.date > currentTime);
-  // const sort = unfinished.sort((a, b) => a.date.localeCompare(b.date));
-  // sort.shift();
 
   return (
     <FlatList

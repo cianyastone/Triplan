@@ -87,8 +87,13 @@ const accountSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.status = "idle";
         state.login.hasLogin = true;
+      })
+      .addCase(loginAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.login.hasLogin = false;
       })
       .addCase(registerAsync.pending, (state) => {
         state.status = "loading";
@@ -96,6 +101,10 @@ const accountSlice = createSlice({
       .addCase(registerAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.login.hasLogin = true;
+      })
+      .addCase(registerAsync.rejected, (state, action) => {
+        state.status = "error";
+        state.login.hasLogin = false;
       })
       .addCase(readUserAsync.fulfilled, (state, action) => {
         state.general = { ...state.general, ...action.payload };
@@ -112,6 +121,7 @@ const accountSlice = createSlice({
 // export state to global
 export const selectGeneral = (state) => state.account.general;
 export const selectLogin = (state) => state.account.login;
+export const selectStatus = (state) => state.account.status;
 
 // export actions to global
 export const { setGeneralAccountInfo, gotoRegister, gotoLogin, signOut } =

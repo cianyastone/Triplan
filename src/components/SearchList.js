@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, Box, Input, ScrollView } from "native-base";
+import { FlatList, Box, Input } from "native-base";
 import Trip from "./Trip";
 import tripData from "../json/trip.json";
 
@@ -75,7 +75,7 @@ class SearchFunction extends Component {
           />
           <Input
             mt={2}
-            ml={3}
+            px={5}
             position="absolute"
             w={300}
             onChangeText={(text) => this.searchItems(text)}

@@ -38,7 +38,6 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(readUserAsync());
-    console.log(general.imageUrl);
   }, []);
 
   const SegmentedContent = () => {
