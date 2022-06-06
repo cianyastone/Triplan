@@ -44,6 +44,9 @@ export const TripStack = ({ navigation: { goBack } }) => {
         <Stack.Screen
         name="Map"
         component={MapScreen}
+        options={{
+            headerShown: false,
+          }}
         />
       </Stack.Navigator>
     );

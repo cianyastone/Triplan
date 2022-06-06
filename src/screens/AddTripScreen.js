@@ -92,7 +92,7 @@ const AddTripScreen = ({ navigation }) => {
   }
 
   return (
-    <Box pt={5} _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
+    <Box pt={10} _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
       <VStack alignItems="center">
         <Pressable
           marginBottom={57}
@@ -349,7 +349,7 @@ const AddTripScreen = ({ navigation }) => {
         </Box>
 
         <Pressable alignItems="center" onPress={() => {
-              navigation.navigate("TripPlanScreen");
+              navigation.navigate("Map");
             }}>
           <Box
             h={55}

@@ -29,7 +29,7 @@ const Goal_data = [
   
 // const { colorMode } = useColorMode();
 
-const DayScreen = () => {
+const DayScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const general = useSelector(selectData);
   const [data, setData] = useState(Goal_data);
@@ -42,7 +42,6 @@ const DayScreen = () => {
       key: `${number+1}`,
       label: "Group",
     };
-    console.log(number+1);
     setData( d => [...d, newRecord] );
     setNumber(number+1);
   }
@@ -102,6 +101,9 @@ const DayScreen = () => {
                   return (
                     <TouchableOpacity
                       onLongPress={drag}
+                      onPress={() => {
+                        navigation.navigate("map");
+                      }}
                     >
                       <Box flexDir='row'>
                       <Box 
