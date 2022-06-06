@@ -212,6 +212,7 @@ const AddTripScreen = () => {
                 開始日期
             </Text>
             <TouchableHighlight
+                underlayColor={white}
                 activeOpacity={0} 
                 onPress={() => setShow(true)}>
                 <View>
@@ -229,6 +230,7 @@ const AddTripScreen = () => {
                                     alignItems:'flex-end',
                                     flexDirection: 'row',
                                 }}
+                                underlayColor={white}
                                 activeOpacity={1}
                                 visible={show}
                                 onPress={() => setShow(false)}>
@@ -238,8 +240,7 @@ const AddTripScreen = () => {
                                             flex: 1,
                                             borderTopColor: black,
                                             borderTopWidth: 1
-                                        }}
-                                        onPress={console.log('datePicker clicked')}>
+                                        }}>
                                         <View  style={{
                                             backgroundColor: white,
                                             height: 276,

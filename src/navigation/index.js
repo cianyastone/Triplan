@@ -89,26 +89,6 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
             backgroundColor: colorMode == "light" ? white : darkBlack,
           },
           headerShadowVisible: false,
-          headerLeft: () => (
-            <Pressable ml={6} onPress={() => goBack()}>
-              <Box
-                size={38}
-                bg="#F9BC75"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius={15}
-                borderWidth={2}
-                _light={{ borderColor: darkBlack }}
-                _dark={{ borderColor: white }}
-              >
-                <Image
-                  alt={"back"}
-                  size={28}
-                  source={require("../asset/back.png")}
-                />
-              </Box>
-            </Pressable>
-          ),
         }}
       />
     </Stack.Navigator>
