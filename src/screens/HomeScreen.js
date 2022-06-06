@@ -6,7 +6,7 @@ import Feather from "react-native-vector-icons/Feather";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import MyTrips from "../components/MyTrips";
 import CollectTrips from "../components/CollectTrips";
-import TestUpload from "../components/TestUpload";
+import TestUpload from "../components/testUpload";
 
 import {
   ScrollView,

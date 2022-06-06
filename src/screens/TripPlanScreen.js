@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, useColorMode } from "native-base";
+import { Box, useColorMode, Flex, Pressable, Text, Image } from "native-base";
 import {  Dimensions  } from 'react-native';
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
+import SafeAreaView from "react-native-safe-area-view";
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";
@@ -15,7 +16,7 @@ const darkBlack="#262626";
 const darkWhite="#E4E4E4";
 
 
-const TripPlanScreen = () => {
+const TripPlanScreen = ({ navigation: { goBack } }) => {
   const { colorMode } = useColorMode();
   // layout = useWindowDimensions();
   // constructor(props) {
@@ -52,7 +53,39 @@ const indexChangeHandler = {
 };
 
   return (
-    <Box flex="1" _light={{ bg: white }} _dark={{ bg: darkBlack }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: colorMode == "light" ? white : darkBlack,
+      }}
+    >
+      <Box flex="1" _light={{ bg: white }} _dark={{ bg: darkBlack }}>
+        <Flex
+          direction="row"
+          alignItems="center"
+          py={2}
+          justifyContent="space-between"
+        >
+          <Pressable ml={6} onPress={() => goBack()}>
+              <Box
+                size={38}
+                bg="#F9BC75"
+                justifyContent="center"
+                alignItems="center"
+                borderRadius={15}
+                borderWidth={2}
+                _light={{ borderColor: darkBlack }}
+                _dark={{ borderColor: white }}
+              >
+                <Image
+                  alt={"back"}
+                  size={28}
+                  source={require("../asset/back.png")}
+                />
+              </Box>
+          </Pressable>
+
+        </Flex>
       {/* <View 
       style={{
         flexDirection: "row",
@@ -137,9 +170,8 @@ const indexChangeHandler = {
         />
         )}
       /> 
-      
-
     </Box>
+    </SafeAreaView>
   );
 };
 

@@ -16,6 +16,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import AuthScreen from "../screens/AuthScreen";
 import { selectLogin } from "../redux/accountSlice";
 import TripPlanScreen from "../screens/TripPlanScreen";
+import AddTripScreen from "../screens/AddTripScreen";
 import Search from "../screens/SearchScreen";
 import { HomeStack } from "./HomeStack";
 
@@ -76,9 +77,9 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
     <Stack.Navigator>
       <Stack.Screen
         name="Trip"
-        component={TripPlanScreen}
+        component={AddTripScreen}
         options={{
-          headerTitle: "行程",
+          headerTitle: "新增行程",
           headerTintColor: colorMode == "light" ? black : white,
           headerTitleStyle: {
             fontSize: 20,
