@@ -1,17 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Feather from "react-native-vector-icons/Feather";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import MyTrips from "../components/MyTrips";
 import CollectTrips from "../components/CollectTrips";
 import TestUpload from "../components/TestUpload";
-
+import { readOthersTripAsync } from "../redux/TripSlice";
 import {
   ScrollView,
   Text,
-  Heading,
   Box,
   Image,
   Flex,
@@ -38,6 +36,7 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(readUserAsync());
+    dispatch(readOthersTripAsync());
   }, []);
 
   const SegmentedContent = () => {

@@ -1,16 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, Heading, Box, Image, Flex, useColorMode } from "native-base";
+import {
+  Text,
+  Heading,
+  Box,
+  Image,
+  Flex,
+  useColorMode,
+  FlatList,
+} from "native-base";
 import moment from "moment";
 import LottieView from "lottie-react-native";
-import TripList from "./TripList";
 import ActionButton from "./ActionButtonTop";
+import Trip from "./Trip";
 import { readTripAsync, selectData } from "../redux/TripSlice";
 
 const MyTrips = () => {
+  const renderItem = ({ item }) => <Trip trip={item} />;
   const datas = useSelector(selectData);
-
   const dispatch = useDispatch();
 
   const { colorMode } = useColorMode();
@@ -119,11 +127,23 @@ const MyTrips = () => {
           <Text fontSize="sm" m={3}>
             未完成的行程
           </Text>
-          <TripList list={unfinished} />
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            data={unfinished}
+            renderItem={renderItem}
+            horizontal={true}
+            keyExtractor={(item) => item.title}
+          />
           <Text fontSize="sm" m={3}>
             已完成的行程
           </Text>
-          <TripList list={finished} />
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            data={finished}
+            renderItem={renderItem}
+            horizontal={true}
+            keyExtractor={(item) => item.title}
+          />
         </Box>
       ) : (
         <Box h={500} justifyContent="center" alignItems="center">

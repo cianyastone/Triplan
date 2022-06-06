@@ -20,6 +20,8 @@ import {
   getDocs,
   addDoc,
   collection,
+  query,
+  where,
 } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -27,6 +29,7 @@ import {
   getReactNativePersistence,
   initializeAuth,
 } from "firebase/auth/react-native";
+import { async } from "@firebase/util";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgzHLrxthEg8fCuy3A60Of9NdqQWzgj0s",
@@ -153,7 +156,8 @@ export const updateUserPhoto = async (userPhoto) => {
 export const uploadTrip = async ({ name, days, date, image }) => {
   const { uid } = auth.currentUser;
   try {
-    const docRef = await addDoc(collection(db, "/users/" + uid + "/trip"), {
+    const docRef = await addDoc(collection(db, "trip"), {
+      user: uid,
       name,
       days,
       date,
@@ -170,9 +174,24 @@ export const readTrip = async () => {
   const { uid } = auth.currentUser;
 
   try {
-    const querySnapshot = await getDocs(
-      collection(db, "/users/" + uid + "/trip")
-    );
+    const q = query(collection(db, "trip"), where("user", "==", uid));
+    const querySnapshot = await getDocs(q);
+    var datas = [];
+    querySnapshot.forEach((doc) => {
+      datas.push(doc.data());
+    });
+    return datas;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const readOthersTrip = async () => {
+  const { uid } = auth.currentUser;
+
+  try {
+    const q = query(collection(db, "trip"), where("user", "!=", uid));
+    const querySnapshot = await getDocs(q);
     var datas = [];
     querySnapshot.forEach((doc) => {
       datas.push(doc.data());

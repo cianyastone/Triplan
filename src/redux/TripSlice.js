@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { uploadTrip, readTrip } from "../api/firebase";
+import { uploadTrip, readTrip, readOthersTrip } from "../api/firebase";
 
 const uploadTripAsync = createAsyncThunk(
   "trip/uploadTrip",
@@ -14,8 +14,17 @@ const readTripAsync = createAsyncThunk("trip/readTrip", async () => {
   return data;
 });
 
+const readOthersTripAsync = createAsyncThunk(
+  "trip/readOthersTrip",
+  async () => {
+    const data = await readOthersTrip();
+    return data;
+  }
+);
+
 const initialState = {
   data: {},
+  othersData: {},
   status: "idle",
 };
 
@@ -37,13 +46,21 @@ const tripSlice = createSlice({
       .addCase(readTripAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.data = action.payload;
+      })
+      .addCase(readOthersTripAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(readOthersTripAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.othersData = action.payload;
       });
   },
 });
 
 export const selectData = (state) => state.trip.data;
+export const selectOthersData = (state) => state.trip.othersData;
 export const selectStatus = (state) => state.trip.status;
 
-export { uploadTripAsync, readTripAsync };
+export { uploadTripAsync, readTripAsync, readOthersTripAsync };
 
 export default tripSlice.reducer;
