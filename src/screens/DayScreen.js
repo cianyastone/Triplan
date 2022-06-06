@@ -1,8 +1,13 @@
-import React, {Component} from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Input, ScrollView, Text, Flex, Image, useColorMode, Pressable, Heading } from "native-base";
 import { TouchableOpacity } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectData,
+  uploadTripAsync,
+  readTripAsync
+} from "../redux/TripSlice";
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";
@@ -24,38 +29,23 @@ const Goal_data = [
   
 // const { colorMode } = useColorMode();
 
-export default class  DayScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: Goal_data,
-      scrollEnabled: true,
-      // chosenDate: new Date(),
-    }
-    // this.setDate = this.setDate.bind(this);
+const DayScreen = () => {
+  const dispatch = useDispatch();
+  const general = useSelector(selectData);
+  const [data, setData] = useState(Goal_data);
+  const [number, setNumber] = useState(1);
+  const [scrollEnabled, setScrollEnabled] = useState(Goal_data);
 
-  }
-
-
-  onEnableScroll = (value) => {
-    this.setState({
-      enableScrollViewScroll: value,
-    });
-  }
-
-
-
-  plusdata = (data) => {
-    let d = this.state.data;
+  const plusdata = (data, number) => {
+    let d = data;
     const newRecord = {
-      key: "2",
+      key: `${number+1}`,
       label: "Group",
     };
-    this.setState({
-      data: [...d, newRecord]
-    })
+    console.log(number+1);
+    setData( d => [...d, newRecord] );
+    setNumber(number+1);
   }
-  render() {
   return(
     <Box 
       flex="1" 
@@ -104,13 +94,11 @@ export default class  DayScreen extends Component {
           <Box width={310}>
             <Box flexDir='column' width={310}>
               <DraggableFlatList
-                data={this.state.data}
-                extraData={this.state.data}
+                data={data}
+                extraData={data}
                 keyExtractor={(item, index) => `draggable-item-${index}`}
-                //onMoveBegin={() => this.setState({ scrollEnabled: false })}
-                onDragEnd={({ data }) => this.setState({ data: data })}
+                onDragEnd={({ data }) => setData(data)}
                 renderItem={({ item, index, drag, isActive }) => {
-                  console.log('index', item)
                   return (
                     <TouchableOpacity
                       onLongPress={drag}
@@ -161,14 +149,6 @@ export default class  DayScreen extends Component {
                               時間
                             </Input>
                           </Box>
-                          {/* <DateTimePicker
-                          mode="time"
-                          value={new Date(12,00)}
-                          display="inline"
-                          textColor="red"
-                          placeHolderText="Select time"
-                          onChange={this.setDate}
-                          /> */}
                         </Box>
                       </Box>
                       </Box>
@@ -202,7 +182,9 @@ export default class  DayScreen extends Component {
                       _dark={{ borderColor: white, bg: darkBlack }}
                       justifyContent='center'
                     >
-                      <TouchableOpacity style={{marginLeft:30}} onPress={() => this.plusdata(Goal_data)}>
+                      <TouchableOpacity 
+                        style={{marginLeft:30}} 
+                        onPress={() => plusdata(Goal_data, number)}>
                         <Text>新增行程</Text>
                       </TouchableOpacity>
                     </Box>
@@ -242,5 +224,6 @@ export default class  DayScreen extends Component {
         </Box>
       </ScrollView>
     </Box>
-  );}
-}
+)}
+
+export default DayScreen;

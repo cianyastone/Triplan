@@ -15,10 +15,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SafeAreaView from "react-native-safe-area-view";
 import AuthScreen from "../screens/AuthScreen";
 import { selectLogin } from "../redux/accountSlice";
-import TripPlanScreen from "../screens/TripPlanScreen";
-import AddTripScreen from "../screens/AddTripScreen";
 import Search from "../screens/SearchScreen";
 import { HomeStack } from "./HomeStack";
+import { TripStack } from "./TripStack";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -68,30 +67,6 @@ const MyTabs = () => {
       />
       <Tab.Screen name="SearchStack" component={Search} />
     </Tab.Navigator>
-  );
-};
-
-const TripStack = ({ navigation: { goBack }, navigation }) => {
-  const { colorMode } = useColorMode();
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Trip"
-        component={AddTripScreen}
-        options={{
-          headerTitle: "新增行程",
-          headerTintColor: colorMode == "light" ? black : white,
-          headerTitleStyle: {
-            fontSize: 20,
-            backgroundColor: colorMode == "light" ? white : darkBlack,
-          },
-          headerStyle: {
-            backgroundColor: colorMode == "light" ? white : darkBlack,
-          },
-          headerShadowVisible: false,
-        }}
-      />
-    </Stack.Navigator>
   );
 };
 

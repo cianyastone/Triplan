@@ -22,23 +22,21 @@ import SectionedMultiSelect from "react-native-sectioned-multi-select";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useDispatch, useSelector } from "react-redux";
 import {
-    selectData,
+  selectData,
   uploadTripAsync,
   readTripAsync
 } from "../redux/TripSlice";
 
-const AddTripScreen = () => {
+const AddTripScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const general = useSelector(selectData);
   const [name, setName] = useState();
   const [days, setDays] = useState("");
   const [image, setImage] = useState(null);
   const [imageUrl, setUrl] = useState();
-  const [service, setService] = useState("");
 
   //Date
   const [date, setDate] = useState(moment());
-  const [defaultDate, setdefaultDate] = useState(moment(now));
   const [show, setShow] = useState(false);
 
   //Color
@@ -350,7 +348,9 @@ const AddTripScreen = () => {
           </Flex>
         </Box>
 
-        <Pressable alignItems="center" onPress={onUpdate}>
+        <Pressable alignItems="center" onPress={() => {
+              navigation.navigate("TripPlanScreen");
+            }}>
           <Box
             h={55}
             w={238}
