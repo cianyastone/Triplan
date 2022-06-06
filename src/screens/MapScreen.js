@@ -7,7 +7,7 @@ import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import Key from '../../key'
+import { Key } from '../../Key'
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";
