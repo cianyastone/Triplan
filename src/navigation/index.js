@@ -9,7 +9,7 @@ import {
   Flex,
   useColorMode,
 } from "native-base";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import SafeAreaView from "react-native-safe-area-view";
@@ -114,7 +114,7 @@ const TripStack = ({ navigation: { goBack }, navigation }) => {
   );
 };
 
-function MyTabBar({ state, descriptors, navigation }) {
+function MyTabBar({ state, navigation }) {
   const { colorMode } = useColorMode();
   return (
     <SafeAreaView
@@ -123,11 +123,10 @@ function MyTabBar({ state, descriptors, navigation }) {
     >
       <Box _light={{ bg: white }} _dark={{ bg: darkBlack }}>
         <Box
-          mt={3}
-          h={60}
-          w={340}
+          h={70}
+          w={360}
           alignSelf="center"
-          borderRadius="10"
+          borderRadius="20"
           borderWidth="1.5"
           _light={{ borderColor: darkBlack }}
           _dark={{ borderColor: white }}

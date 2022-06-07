@@ -6,7 +6,7 @@ import Trip from "./Trip";
 import LottieView from "lottie-react-native";
 
 const Search = () => {
-  const renderItem = ({ item }) => <Trip trip={item} />;
+  const renderItem = ({ item }) => <Trip trip={item} recommend={true}/>;
   const othersData = useSelector(selectOthersData);
   const [getData, GetData] = useState(false);
   const [searchData, SearchData] = useState();
@@ -79,7 +79,7 @@ const Search = () => {
           numColumns={2}
           data={searchData}
           renderItem={renderItem}
-          keyExtractor={(item) => item.title}
+          keyExtractor={(item) => item.name}
           mb={1}
           columnWrapperStyle={{ justifyContent: "space-between" }}
         />
