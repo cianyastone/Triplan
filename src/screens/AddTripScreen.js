@@ -27,6 +27,7 @@ import {
   readTripAsync
 } from "../redux/TripSlice";
 
+
 const AddTripScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const general = useSelector(selectData);
@@ -76,6 +77,7 @@ const AddTripScreen = ({ navigation }) => {
       setImage(result);
     }
   };
+  
 
   //Date Picker
   const onChange = (event, selectedDate) => {
@@ -349,7 +351,13 @@ const AddTripScreen = ({ navigation }) => {
         </Box>
 
         <Pressable alignItems="center" onPress={() => {
-              navigation.navigate("Map");
+              navigation.navigate("TripPlanScreenDay1",{
+                  name: name,
+                  days: days,
+                  date: date,
+                  image: image,
+                  imageUrl: imageUrl,
+              });
             }}>
           <Box
             h={55}

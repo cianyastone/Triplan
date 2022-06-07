@@ -1,7 +1,9 @@
 import React from "react";
 import { Image, Pressable, Box, useColorMode } from "native-base";
 import { createStackNavigator } from "@react-navigation/stack";
-import TripPlanScreen from "../screens/TripPlanScreen";
+import TripPlanScreenDay1 from "../days/TripPlanScreenDay1";
+import TripPlanScreenDay2 from "../days/TripPlanScreenDay2";
+import TripPlanScreenDay3 from "../days/TripPlanScreenDay3";
 import AddTripScreen from "../screens/AddTripScreen";
 import MapScreen from "../screens/MapScreen";
 
@@ -16,6 +18,8 @@ const darkBlack = "#262626";
 
 export const TripStack = ({ navigation: { goBack } }) => {
     const { colorMode } = useColorMode();
+
+    
     return (
         <Stack.Navigator>
         <Stack.Screen
@@ -35,10 +39,27 @@ export const TripStack = ({ navigation: { goBack } }) => {
           }}
         />
         <Stack.Screen
-        name="TripPlanScreen"
-        component={TripPlanScreen}
+        name="TripPlanScreenDay1"
+        component={TripPlanScreenDay1}
         options={{
             headerShown: false,
+            animationEnabled: false,
+          }}
+        />
+        <Stack.Screen
+        name="TripPlanScreenDay2"
+        component={TripPlanScreenDay2}
+        options={{
+            headerShown: false,
+            animationEnabled: false,
+          }}
+        />
+        <Stack.Screen
+        name="TripPlanScreenDay3"
+        component={TripPlanScreenDay3}
+        options={{
+            headerShown: false,
+            animationEnabled: false,
           }}
         />
         <Stack.Screen

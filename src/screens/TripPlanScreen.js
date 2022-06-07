@@ -16,8 +16,9 @@ const darkBlack="#262626";
 const darkWhite="#E4E4E4";
 
 
-const TripPlanScreen = ({ navigation: { goBack } }, props) => {
+const TripPlanScreen = ({  navigation: { goBack }, route }) => {
   const { colorMode } = useColorMode();
+  const { name, days, date, image, imageUrl } = route.params;
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([{
@@ -30,6 +31,15 @@ const TripPlanScreen = ({ navigation: { goBack } }, props) => {
     key: "third",
     title: '第三天'
   }, ]);
+
+  const DayView = () => {
+    <DayScreen 
+      name= {name}
+      days= {days}
+      date= {date}
+      image= {image}
+      imageUrl= {imageUrl}/>
+  }
 
   const renderScene = SceneMap({
   first: DayScreen,
@@ -78,7 +88,7 @@ const TripPlanScreen = ({ navigation: { goBack } }, props) => {
             alignContent="center"
             fontSize="md"
             fontWeight="bold">
-            {props.name}高雄
+            {(name)}
           </Text>
         </Flex>
       <TabView 

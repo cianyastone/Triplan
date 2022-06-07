@@ -29,12 +29,16 @@ const Goal_data = [
   
 // const { colorMode } = useColorMode();
 
-const DayScreen = ({ navigation }) => {
+const DayScreen = ({ navigation, props }) => {
   const dispatch = useDispatch();
   const general = useSelector(selectData);
   const [data, setData] = useState(Goal_data);
   const [number, setNumber] = useState(1);
-  const [scrollEnabled, setScrollEnabled] = useState(Goal_data);
+  //const name = props.name;
+  const onUpdate = () => {
+    dispatch(uploadTripAsync({ name, days, date, image }));;
+  };
+
 
   const plusdata = (data, number) => {
     let d = data;
