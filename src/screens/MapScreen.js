@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { StyleSheet, View, Dimensions, TouchableHighlight, Modal } from 'react-native';
-import { Box, useColorMode, Flex, Pressable, Text, Image } from "native-base";
+import { StyleSheet, View, Dimensions, TouchableHighlight, Modal, TouchableOpacity } from 'react-native';
+import { Box, useColorMode, Flex, Pressable, Text, Image, ScrollView, TextArea, Heading } from "native-base";
 import SafeAreaView from "react-native-safe-area-view";
 import * as Location from 'expo-location';
 import * as Device from "expo-device";
@@ -17,12 +17,16 @@ const white="#fff";
 const green="#7EBB94";
 const darkBlack="#262626";
 const darkWhite="#E4E4E4";
+const lightYellow="#F7E2BC";
+const lightBlue ="#E7FEFF";
 
 
 export default function MapScreen({ navigation: { goBack } }) {
     const { colorMode } = useColorMode();
     const [onCurrentLocation, setOnCurrentLocation] = useState(false);
     const [showDetail, setShowDetail] = useState(false);
+    const [detail, setDetail] = useState([]);
+    const [mapPad, setMapPad] = useState();
 
     const [region, setRegion] = useState({
         longitude: 121.544637,
@@ -95,7 +99,8 @@ export default function MapScreen({ navigation: { goBack } }) {
             style={styles.map}
             region={region}
             provider="google"
-            onRegionChangeComplete={onRegionChangeComplete}>
+            onRegionChangeComplete={onRegionChangeComplete}
+            mapPadding={mapPad}>
             <Marker 
                 coordinate={marker.coord} 
                 pinColor={blueGreen}
@@ -210,6 +215,8 @@ export default function MapScreen({ navigation: { goBack } }) {
                                     y: 4,
                                   },
                               });
+                              setDetail(details);
+                              setMapPad({top: 100, left: 0, right: 0, bottom: 450})
                             DetailShown();
                         }}
                         query={{
@@ -226,7 +233,8 @@ export default function MapScreen({ navigation: { goBack } }) {
                 <Modal
                     transparent={true}
                     animationType="slide"
-                    visible={showDetail}
+                    visible={showDetail} 
+                    propagateSwipe={true}
                     supportedOrientations={['portrait']}
                     onRequestClose={()=>setShowDetail(false)}>
                 <Box flex={1}>
@@ -254,11 +262,79 @@ export default function MapScreen({ navigation: { goBack } }) {
                                 height: 400,
                                 borderColor:  black,
                                 flexDirection: 'column',
-                                justifyContent: 'center',
+                                justifyContent: 'flex-start',
                             }}>
-                                <View>
-                                    
-                                </View>
+                                <Box h={200}>
+                                <ScrollView
+                                    horizontal= {false}
+                                    scrollEnabled={true}>
+                                <TouchableOpacity>
+                                <Box ml={3} mt={2} p={15}>
+                                    <Text 
+                                        fontSize={20}
+                                        fontWeight='bold'>
+                                        {detail.name}
+                                    </Text>
+                                    <Text 
+                                        mt={3}
+                                        fontSize={14}>
+                                        {detail.formatted_address}
+                                    </Text>
+                                    <Box mt={3}>
+                                    {detail.opening_hours.weekday_text.map(item => {
+                                            return <Text 
+                                            fontSize={14}>
+                                            {item}
+                                            </Text>;
+                                        })}
+                                    </Box>
+                                </Box>
+                                </TouchableOpacity>
+                                </ScrollView>
+                                </Box>
+                                <Box
+                                    mt={5}
+                                    h={100}
+                                    w={340}
+                                    borderColor={black}
+                                    borderWidth={1.5}
+                                    borderRadius={20}
+                                    alignSelf='center'
+                                    backgroundColor={lightBlue}
+                                    p={3}>
+                                    <Text 
+                                        ml={2}
+                                        fontSize={16}>
+                                        備註
+                                    </Text>
+                                    <TextArea 
+                                        h={50}
+                                        mt={1}
+                                        ml={1}
+                                        borderWidth={0}
+                                        placeholder="請輸入" />
+                                </Box>
+                                <Pressable ml={7} mt={3}>
+                                    <Box
+                                        h={27}
+                                        w={92}
+                                        borderRadius={20}
+                                        borderWidth="1.5"
+                                        _light={{ borderColor: black }}
+                                        _dark={{ borderColor: white }}
+                                        bg={orange}
+                                        justifyContent='center'
+                                        alignItems='center'
+                                    >
+                                    <Heading
+                                        _light={{ color: white }}
+                                        _dark={{ color: black }}
+                                        fontSize="sm"
+                                    >
+                                        加入行程
+                                    </Heading>
+                                    </Box>
+                                    </Pressable>
                             </View>
                         </TouchableHighlight>
                 </TouchableHighlight>
