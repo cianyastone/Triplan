@@ -60,8 +60,9 @@ const MyTabs = () => {
       <Tab.Screen
         name="AddStack"
         options={{
-          // hide the bottom tab bar on Product Screen
-          tabBarStyle: { display: "none" },
+          tabBarButton: () => null,
+          tabBarVisible: false, // if you don't want to see the tab bar
+          tabBarLabel: () => null,
         }}
         component={TripStack}
       />
