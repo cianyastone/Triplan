@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, useColorMode } from "native-base";
+import { Box, useColorMode, Flex, Pressable, Text, Image } from "native-base";
 import {  Dimensions  } from 'react-native';
 import DayScreen from "./DayScreen";
 import DatePicker from 'react-native-date-picker'
 import { TabBar, TabView, SceneMap } from 'react-native-tab-view';
+import SafeAreaView from "react-native-safe-area-view";
 
 const black="#1D1D1D";
 const blueGreen="#2AB3C0";
@@ -15,20 +16,8 @@ const darkBlack="#262626";
 const darkWhite="#E4E4E4";
 
 
-const TripPlanScreen = () => {
+const TripPlanScreen = ({ navigation: { goBack } }, props) => {
   const { colorMode } = useColorMode();
-  // layout = useWindowDimensions();
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     index: 0,
-  //     routes: [
-  //       { key: 'first', title: '第一天' },
-  //       { key: 'second', title: '第二天' },
-  //       { key: 'third', title: '第三天' },
-  //     ]
-  //   }
-  // }
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([{
@@ -46,44 +35,52 @@ const TripPlanScreen = () => {
   first: DayScreen,
   second: DayScreen,
   third: DayScreen,
-});
-const indexChangeHandler = {
-  width: Dimensions.get("window").width
-};
+  });
 
   return (
-    <Box flex="1" _light={{ bg: white }} _dark={{ bg: darkBlack }}>
-      {/* <View 
+    <SafeAreaView
       style={{
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        marginLeft: 20,
-        height: 75,
+        flex: 1,
+        backgroundColor: colorMode == "light" ? white : darkBlack,
       }}
-      >
-        <Text style={{fontSize:14}}>時間：</Text>
-        <Button 
-        title="請選時間" 
-        onPress={() => setOpen(true)} 
-        style={{
-          height:14,
-          justifyContent: "flex-start"
-        }}
-        />
-        <DatePicker
-          modal
-          open={open}
-          date={date}
-          onConfirm={(date) => {
-            setOpen(false)
-            setDate(date)
-          }}
-          onCancel={() => {
-            setOpen(false)
-          }}
-        />
-        </View> */}
+    >
+      <Box flex="1" _light={{ bg: white }} _dark={{ bg: darkBlack }}>
+        <Flex
+          direction="column"
+          alignItems="center"
+          py={2}
+          justifyContent="center"
+        >
+          <Pressable
+            ml={6} 
+            onPress={() => goBack()}
+            alignSelf="flex-start">
+              <Box
+                size={38}
+                bg="#F9BC75"
+                justifyContent="center"
+                alignItems="center"
+                borderRadius={15}
+                borderWidth={2}
+                _light={{ borderColor: darkBlack }}
+                _dark={{ borderColor: white }}
+              >
+                <Image
+                  alt={"back"}
+                  size={28}
+                  source={require("../asset/back.png")}
+                />
+              </Box>
+          </Pressable>
+          <Text
+            position="absolute"
+            justifyContent="center"
+            alignContent="center"
+            fontSize="md"
+            fontWeight="bold">
+            {props.name}高雄
+          </Text>
+        </Flex>
       <TabView 
       navigationState={{ index, routes }}
       renderScene={renderScene}
@@ -137,9 +134,8 @@ const indexChangeHandler = {
         />
         )}
       /> 
-      
-
     </Box>
+    </SafeAreaView>
   );
 };
 

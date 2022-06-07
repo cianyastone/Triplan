@@ -15,9 +15,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SafeAreaView from "react-native-safe-area-view";
 import AuthScreen from "../screens/AuthScreen";
 import { selectLogin } from "../redux/accountSlice";
-import TripPlanScreen from "../screens/TripPlanScreen";
 import Search from "../screens/SearchScreen";
 import { HomeStack } from "./HomeStack";
+import { TripStack } from "./TripStack";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,57 +60,14 @@ const MyTabs = () => {
       <Tab.Screen
         name="AddStack"
         options={{
-          // hide the bottom tab bar on Product Screen
-          tabBarStyle: { display: "none" },
+          tabBarButton: () => null,
+          tabBarVisible: false, // if you don't want to see the tab bar
+          tabBarLabel: () => null,
         }}
         component={TripStack}
       />
       <Tab.Screen name="SearchStack" component={Search} />
     </Tab.Navigator>
-  );
-};
-
-const TripStack = ({ navigation: { goBack }, navigation }) => {
-  const { colorMode } = useColorMode();
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Trip"
-        component={TripPlanScreen}
-        options={{
-          headerTitle: "行程",
-          headerTintColor: colorMode == "light" ? black : white,
-          headerTitleStyle: {
-            fontSize: 20,
-            backgroundColor: colorMode == "light" ? white : darkBlack,
-          },
-          headerStyle: {
-            backgroundColor: colorMode == "light" ? white : darkBlack,
-          },
-          headerShadowVisible: false,
-          headerLeft: () => (
-            <Pressable ml={6} onPress={() => goBack()}>
-              <Box
-                size={38}
-                bg="#F9BC75"
-                justifyContent="center"
-                alignItems="center"
-                borderRadius={15}
-                borderWidth={2}
-                _light={{ borderColor: darkBlack }}
-                _dark={{ borderColor: white }}
-              >
-                <Image
-                  alt={"back"}
-                  size={28}
-                  source={require("../asset/back.png")}
-                />
-              </Box>
-            </Pressable>
-          ),
-        }}
-      />
-    </Stack.Navigator>
   );
 };
 
