@@ -43,7 +43,7 @@ const Home = ({ navigation }) => {
     if (selectedIndex == 0) {
       return <MyTrips />;
     } else {
-      return <TestUpload />;
+      return <CollectTrips />;
     }
   };
 
@@ -78,7 +78,7 @@ const Home = ({ navigation }) => {
               >
                 <Feather name="user" size={44} color={white} />
                 <Image
-                  alt=""
+                  alt=" "
                   position="absolute"
                   borderRadius={25}
                   size="44"
@@ -105,10 +105,10 @@ const Home = ({ navigation }) => {
         </Flex>
         <Box alignItems="center">
           <Box
-            w={140}
+            w={150}
             h={34}
             backgroundColor={blue}
-            borderRadius={8}
+            borderRadius={13}
             borderWidth={1.5}
             borderColor={colorMode == "light" ? black : darkWhite}
           />
@@ -131,9 +131,7 @@ const Home = ({ navigation }) => {
             />
           </Box>
         </Box>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <SegmentedContent />
-        </ScrollView>
+        <SegmentedContent />
       </Box>
     </SafeAreaView>
   );

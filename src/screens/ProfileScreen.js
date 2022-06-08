@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import {
   Text,
   Box,
@@ -11,13 +12,13 @@ import {
 } from "native-base";
 import Feather from "react-native-vector-icons/Feather";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectGeneral, readUserAsync } from "../redux/accountSlice";
+import { useSelector } from "react-redux";
+import { selectGeneral } from "../redux/accountSlice";
+import { selectData } from "../redux/TripSlice";
 
 const ProfileScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
   const general = useSelector(selectGeneral);
+  const datas = useSelector(selectData);
 
   const { colorMode } = useColorMode();
   const black = "#1D1D1D";
@@ -29,8 +30,17 @@ const ProfileScreen = ({ navigation }) => {
   const darkBlack = "#262626";
   const darkWhite = "#E4E4E4";
 
+  const currentTime = new Date().toISOString();
+  const [finished, setFinished] = useState([]);
+
   useEffect(() => {
-    dispatch(readUserAsync());
+    if (Object.keys(datas).length > 0) {
+      setFinished(
+        datas
+          .filter((x) => x.date < currentTime)
+          .sort((a, b) => a.date.localeCompare(b.date))
+      );
+    }
   }, []);
 
   return (
@@ -61,7 +71,7 @@ const ProfileScreen = ({ navigation }) => {
             source={{ uri: general.imageUrl }}
             borderRadius={19}
             style={{ width: 94, height: 94 }}
-            alt="userImage"
+            alt=" "
           />
         </Box>
         <Text fontSize="xl" fontWeight="bold" mt={15} mb={15}>
@@ -103,7 +113,7 @@ const ProfileScreen = ({ navigation }) => {
                   size={25}
                   color={colorMode == "light" ? black : darkWhite}
                 />
-                <Text ml={11}>已完成 5 個旅行</Text>
+                <Text ml={11}>已完成 {finished.length} 個旅行</Text>
               </Flex>
             </Box>
             <Flex direction="row">

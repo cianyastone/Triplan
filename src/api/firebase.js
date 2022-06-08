@@ -9,7 +9,6 @@ import {
   getStorage,
   ref,
   getDownloadURL,
-  getBlob,
   uploadBytesResumable,
 } from "firebase/storage";
 import {
@@ -22,6 +21,7 @@ import {
   collection,
   query,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -192,6 +192,75 @@ export const readOthersTrip = async () => {
   try {
     const q = query(collection(db, "trip"), where("user", "!=", uid));
     const querySnapshot = await getDocs(q);
+    var datas = [];
+    querySnapshot.forEach((doc) => {
+      datas.push(doc.data());
+    });
+    return datas;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteTrip = async ({ name }) => {
+  const { uid } = auth.currentUser;
+
+  try {
+    const collectionRef = query(
+      collection(db, "trip"),
+      where("name", "==", name),
+      where("user", "==", uid)
+    );
+    const querySnapshot = await getDocs(collectionRef);
+    querySnapshot.forEach((data) => {
+      const docRef = doc(db, "trip", data.id);
+      deleteDoc(docRef);
+      console.log("success");
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const collectTrip = async ({ name, user }) => {
+  const { uid } = auth.currentUser;
+  try {
+    const docRef = await addDoc(collection(db, "/users/" + uid + "/collect"), {
+      name,
+      user,
+    });
+    const docSnap = await getDoc(docRef);
+    return docSnap.data();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteCollect = async ({ name, user }) => {
+  const { uid } = auth.currentUser;
+  try {
+    const collectionRef = query(
+      collection(db, "/users/" + uid + "/collect"),
+      where("name", "==", name),
+      where("user", "==", user)
+    );
+    const querySnapshot = await getDocs(collectionRef);
+    querySnapshot.forEach((data) => {
+      const docRef = doc(db, "/users/" + uid + "/collect", data.id);
+      deleteDoc(docRef);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const readCollect = async () => {
+  const { uid } = auth.currentUser;
+
+  try {
+    const querySnapshot = await getDocs(
+      collection(db, "/users/" + uid + "/collect")
+    );
     var datas = [];
     querySnapshot.forEach((doc) => {
       datas.push(doc.data());
