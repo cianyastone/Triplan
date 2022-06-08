@@ -83,7 +83,7 @@ const MyTrips = () => {
                     _dark={{ bg: darkBlack, borderColor: darkWhite }}
                   >
                     <Image
-                      alt="sort[0]"
+                      alt="trip image"
                       position="absolute"
                       alignSelf="center"
                       w="96%"
