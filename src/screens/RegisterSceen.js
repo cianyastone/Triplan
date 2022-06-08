@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   ScrollView,
   Box,
@@ -14,16 +14,9 @@ import {
   Center,
   Image,
 } from "native-base";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withTiming,
-  Easing,
-} from "react-native-reanimated";
 import Feather from "react-native-vector-icons/Feather";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet } from "react-native";
+import LottieView from "lottie-react-native";
 import { gotoLogin, registerAsync, selectStatus } from "../redux/accountSlice";
 
 const RegisterScreen = () => {
@@ -32,17 +25,6 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const rotation = useSharedValue(0);
-
-  const animatedSpinnerStyles = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          rotateZ: `${rotation.value}deg`,
-        },
-      ],
-    };
-  }, [rotation.value]);
 
   const { colorMode } = useColorMode();
   const focusInputStyle = {
@@ -64,23 +46,6 @@ const RegisterScreen = () => {
   const goToLogin = () => {
     dispatch(gotoLogin());
   };
-
-  useEffect(() => {
-    if (loginStatus == "error") {
-      rotation.value = withTiming(0, {
-        duration: 1000,
-        easing: Easing.linear,
-      });
-    } else if (loginStatus == "loading") {
-      rotation.value = withRepeat(
-        withTiming(360, {
-          duration: 1000,
-          easing: Easing.linear,
-        }),
-        -1
-      );
-    }
-  }, [loginStatus]);
 
   return (
     <Box _light={{ bg: white }} _dark={{ bg: darkBlack }} flex={1}>
@@ -237,21 +202,33 @@ const RegisterScreen = () => {
               _dark={{ borderColor: white }}
               bg={orange}
             />
-            <Heading
-              position="absolute"
-              mt={15}
-              _light={{ color: white }}
-              _dark={{ color: black }}
-              fontSize="md"
-            >
-              {loginStatus == "loading" ? (
-                <Animated.View
-                  style={[styles.spinner, animatedSpinnerStyles]}
-                />
-              ) : (
-                "註冊"
-              )}
-            </Heading>
+            {loginStatus == "loading" ? (
+              <Box
+                position="absolute"
+                w="100%"
+                h={50}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Box w="100%" h={21}>
+                  <LottieView
+                    source={require("../LottieAnim/LoadingWhite.json")}
+                    loop
+                    autoPlay
+                  />
+                </Box>
+              </Box>
+            ) : (
+              <Heading
+                position="absolute"
+                mt={15}
+                _light={{ color: white }}
+                _dark={{ color: black }}
+                fontSize="md"
+              >
+                註冊
+              </Heading>
+            )}
           </Pressable>
           <Flex
             mt={23}
@@ -311,18 +288,5 @@ const RegisterScreen = () => {
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  spinner: {
-    height: 20,
-    width: 20,
-    borderRadius: 30,
-    borderWidth: 4,
-    borderTopColor: "#f5f5f5",
-    borderRightColor: "#f5f5f5",
-    borderBottomColor: "lightblue",
-    borderLeftColor: "lightblue",
-  },
-});
 
 export default RegisterScreen;

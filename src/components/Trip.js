@@ -2,8 +2,9 @@ import React from "react";
 import { Text, Box, Image, Flex } from "native-base";
 import moment from "moment";
 import ActionButton from "./ActionButton";
+import CollectButton from "./CollectButton";
 
-const Trip = ({ trip }) => {
+const Trip = ({ trip, recommend }) => {
   const black = "#1D1D1D";
   const blueGreen = "#2AB3C0";
   const orange = "#F9BC75";
@@ -35,7 +36,7 @@ const Trip = ({ trip }) => {
         _dark={{ bg: darkBlack, borderColor: darkWhite }}
       >
         <Image
-          alt={"trip"}
+          alt="trip"
           w={140}
           h={100}
           borderRadius={10}
@@ -56,7 +57,11 @@ const Trip = ({ trip }) => {
               {moment(trip.date).format("YY")}
             </Text>
           </Box>
-          <ActionButton />
+          {recommend ? (
+            <CollectButton name={trip.name} user={trip.user} />
+          ) : (
+            <ActionButton name={trip.name} />
+          )}
         </Flex>
       </Flex>
     </Box>

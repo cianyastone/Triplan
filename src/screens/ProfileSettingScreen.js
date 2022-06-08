@@ -88,39 +88,42 @@ const ProfileSettingScreen = () => {
           justifyContent="center"
         >
           <Box
+            alignItems="center"
+            justifyContent="center"
             w={102}
             h={102}
             backgroundColor={white}
             borderRadius={21}
             shadow="3"
-          />
-          <Box
-            w={94}
-            h={94}
-            position="absolute"
-            borderRadius={19}
-            backgroundColor={orange}
-            alignItems="center"
-            justifyContent="center"
           >
-            <Feather name="user" size={94} color={white} />
-          </Box>
-          <Image
-            position="absolute"
-            source={{ uri: imageUrl }}
-            borderRadius={19}
-            style={{ width: 94, height: 94 }}
-            alt="userImage"
-          />
-          {image && (
+            <Box
+              w={94}
+              h={94}
+              position="absolute"
+              borderRadius={19}
+              backgroundColor={orange}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Feather name="user" size={94} color={white} />
+            </Box>
             <Image
               position="absolute"
-              source={{ uri: image.uri }}
+              source={{ uri: imageUrl }}
               borderRadius={19}
               style={{ width: 94, height: 94 }}
-              alt="userImage"
+              alt=" "
             />
-          )}
+            {image && (
+              <Image
+                position="absolute"
+                source={{ uri: image.uri }}
+                borderRadius={19}
+                style={{ width: 94, height: 94 }}
+                alt="userImage"
+              />
+            )}
+          </Box>
         </Pressable>
         <FormControl mb={19} h={55} alignItems="center">
           <Box

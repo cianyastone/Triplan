@@ -1,17 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Feather from "react-native-vector-icons/Feather";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import MyTrips from "../components/MyTrips";
 import CollectTrips from "../components/CollectTrips";
 import TestUpload from "../components/TestUpload";
-
+import { readOthersTripAsync } from "../redux/TripSlice";
 import {
   ScrollView,
   Text,
-  Heading,
   Box,
   Image,
   Flex,
@@ -38,13 +36,14 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(readUserAsync());
+    dispatch(readOthersTripAsync());
   }, []);
 
   const SegmentedContent = () => {
     if (selectedIndex == 0) {
       return <MyTrips />;
     } else {
-      return <TestUpload />;
+      return <CollectTrips />;
     }
   };
 
@@ -79,7 +78,7 @@ const Home = ({ navigation }) => {
               >
                 <Feather name="user" size={44} color={white} />
                 <Image
-                  alt=""
+                  alt=" "
                   position="absolute"
                   borderRadius={25}
                   size="44"
@@ -106,10 +105,10 @@ const Home = ({ navigation }) => {
         </Flex>
         <Box alignItems="center">
           <Box
-            w={140}
+            w={150}
             h={34}
             backgroundColor={blue}
-            borderRadius={8}
+            borderRadius={13}
             borderWidth={1.5}
             borderColor={colorMode == "light" ? black : darkWhite}
           />
@@ -132,9 +131,7 @@ const Home = ({ navigation }) => {
             />
           </Box>
         </Box>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <SegmentedContent />
-        </ScrollView>
+        <SegmentedContent />
       </Box>
     </SafeAreaView>
   );

@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Button, FormControl, Heading, VStack, Input } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadTripAsync, readTripAsync, selectData } from "../redux/TripSlice";
+import {
+  uploadTripAsync,
+  readTripAsync,
+  selectData,
+  readOthersTripAsync,
+  selectOthersData,
+} from "../redux/TripSlice";
 
 const TestUpload = () => {
   const datas = useSelector(selectData);
+  const othersData = useSelector(selectOthersData);
   const dispatch = useDispatch();
   const [name, setName] = useState();
   const [days, setDays] = useState();
@@ -19,8 +26,9 @@ const TestUpload = () => {
 
   const read = () => {
     dispatch(readTripAsync());
-    console.log(datas);
+    dispatch(readOthersTripAsync());
     // console.log(Object.keys(datas).length);
+    console.log(othersData);
   };
 
   return (
