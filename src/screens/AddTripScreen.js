@@ -33,8 +33,9 @@ const AddTripScreen = ({ navigation }) => {
   const general = useSelector(selectData);
   const [name, setName] = useState();
   const [days, setDays] = useState();
+  const [showDate, setShowDate] = useState();
   const [image, setImage] = useState(null);
-  const [imageUrl, setUrl] = useState();
+  const [imageUrl, setUrl] = useState(null);
 
   //Date
   const [date, setDate] = useState(moment());
@@ -52,7 +53,7 @@ const AddTripScreen = ({ navigation }) => {
 
   //Trip Detail
   const onUpdate = () => {
-    dispatch(uploadTripAsync({ name, days, date, image }));
+    dispatch(uploadTripAsync({ name, days, date, imageUrl }));
     navigation.navigate("TripPlanScreenDay1",{
       name: name,
       days: days,
@@ -60,17 +61,13 @@ const AddTripScreen = ({ navigation }) => {
       image: image,
       imageUrl: imageUrl,
      });
+     console.log({name, days, date, imageUrl })
   };
 
   useEffect(() => {
     dispatch(readTripAsync());
   }, []);
 
-  useEffect(() => {
-    setName(general.name);
-    setDays(general.days);
-    setUrl(general.imageUrl);
-  }, [general]);
 
   //Image
   const pickImage = async () => {
@@ -82,13 +79,15 @@ const AddTripScreen = ({ navigation }) => {
     });
     if (!result.cancelled) {
       setImage(result);
+      setUrl(result.uri);
     }
   };
   
 
   //Date Picker
   const onChange = (event, selectedDate) => {
-    setDate(selectedDate);
+    let d = moment(selectedDate).format('YYYY-MM-DD');
+    setDate(d);
   };
   const onCancelPress = () =>{
       setDate(moment());
