@@ -35,7 +35,7 @@ const AddTripScreen = ({ navigation }) => {
   const [days, setDays] = useState();
   const [showDate, setShowDate] = useState();
   const [image, setImage] = useState(null);
-  const [imageUrl, setUrl] = useState(null);
+  const [img, setImg] = useState(null);
 
   //Date
   const [date, setDate] = useState(moment());
@@ -53,15 +53,15 @@ const AddTripScreen = ({ navigation }) => {
 
   //Trip Detail
   const onUpdate = () => {
-    dispatch(uploadTripAsync({ name, days, date, imageUrl }));
+    dispatch(uploadTripAsync({ name, days, date, image }));
     navigation.navigate("TripPlanScreenDay1",{
       name: name,
       days: days,
       date: date,
       image: image,
-      imageUrl: imageUrl,
+      img: img,
      });
-     console.log({name, days, date, imageUrl })
+     console.log({name, days, date, image })
   };
 
   useEffect(() => {
@@ -78,8 +78,8 @@ const AddTripScreen = ({ navigation }) => {
       quality: 1,
     });
     if (!result.cancelled) {
-      setImage(result);
-      setUrl(result.uri);
+      setImg(result);
+      setImage(result.uri);
     }
   };
   
@@ -128,7 +128,7 @@ const AddTripScreen = ({ navigation }) => {
           </Box>
           <Image
             position="absolute"
-            source={{ uri: imageUrl }}
+            source={{ uri: image }}
             borderRadius={19}
             style={{ width: 94, height: 94 }}
             alt="userImage"
@@ -137,13 +137,13 @@ const AddTripScreen = ({ navigation }) => {
             position="absolute">
             選擇照片
             </Text>
-          {image && (
+          {img && (
             <Image
               position="absolute"
-              source={{ uri: image.uri }}
+              source={{ uri: img.uri }}
               borderRadius={19}
               style={{ width: 94, height: 94 }}
-              alt="userImage"
+              alt="tripImage"
             />
           )}
         </Pressable>
