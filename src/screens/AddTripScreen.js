@@ -61,7 +61,6 @@ const AddTripScreen = ({ navigation }) => {
       image: image,
       img: img,
      });
-     console.log({name, days, date, image })
   };
 
   useEffect(() => {
