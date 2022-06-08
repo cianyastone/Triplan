@@ -195,7 +195,6 @@ export default function MapScreen({ navigation: { goBack } }) {
                         placeholder='在這裡搜尋'
                         onPress={(data, details = null) => {
                             // 'details' is provided when fetchDetails = true
-                            console.log(data, details);
                             setRegion({
                                 latitude: details.geometry.location.lat,
                                 longitude: details.geometry.location.lng,

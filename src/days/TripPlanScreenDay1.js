@@ -56,7 +56,6 @@ const TripPlanScreenDay1 = ({  navigation: { goBack }, navigation, route }) => {
     setData( d => [...d, newRecord] );
     setNumber(number+1);
   }
-  console.log({days})
   console.log({data})
 
   const dataChange = (data, number, address, name) =>{
