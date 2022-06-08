@@ -32,7 +32,7 @@ const AddTripScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const general = useSelector(selectData);
   const [name, setName] = useState();
-  const [days, setDays] = useState("");
+  const [days, setDays] = useState();
   const [image, setImage] = useState(null);
   const [imageUrl, setUrl] = useState();
 
@@ -52,7 +52,14 @@ const AddTripScreen = ({ navigation }) => {
 
   //Trip Detail
   const onUpdate = () => {
-    dispatch(uploadTripAsync({ name, days, date, image }));;
+    dispatch(uploadTripAsync({ name, days, date, image }));
+    navigation.navigate("TripPlanScreenDay1",{
+      name: name,
+      days: days,
+      date: date,
+      image: image,
+      imageUrl: imageUrl,
+     });
   };
 
   useEffect(() => {
@@ -350,15 +357,7 @@ const AddTripScreen = ({ navigation }) => {
           </Flex>
         </Box>
 
-        <Pressable alignItems="center" onPress={() => {
-              navigation.navigate("TripPlanScreenDay1",{
-                  name: name,
-                  days: days,
-                  date: date,
-                  image: image,
-                  imageUrl: imageUrl,
-              });
-            }}>
+        <Pressable alignItems="center" onPress={onUpdate}>
           <Box
             h={55}
             w={238}

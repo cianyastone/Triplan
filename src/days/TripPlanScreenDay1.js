@@ -25,9 +25,9 @@ const lightBlue ="#E7FEFF";
 
 const Goal_data = [
   {
-    key: "1",
-    label: "Group",
-    backgroundColor: "#black",
+    key: "0",
+    sceneName: "地名",
+    sceneAddress: "地址",
   }
 ]
   
@@ -37,34 +37,34 @@ const TripPlanScreenDay1 = ({  navigation: { goBack }, navigation, route }) => {
   const { name, days, date, image, imageUrl } = route.params;
   const dispatch = useDispatch();
   const general = useSelector(selectData);
-  const [data, setData] = useState(Goal_data);
+  const [data, setData] = useState([]);
   const [number, setNumber] = useState(1);
+  const [ sceneName, setSceneName ] = useState("");
+  const [ sceneAddress, setSceneAddress ] = useState("");
   //const name = props.name;
   const onUpdate = () => {
     dispatch(uploadTripAsync({ name, days, date, image }));;
   };
 
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([{
-    key: "first",
-    title: '第一天'
-  }, {
-    key: "second",
-    title: '第二天' 
-  }, {
-    key: "third",
-    title: '第三天'
-  }, ]);
-
   const plusdata = (data, number) => {
-    let d = data;
-    const newRecord = {
-      key: `${number+1}`,
-      label: "Group",
-    };
+    
+    const newRecord = [
+      {key: number,
+      sceneName: "地名",
+      sceneAddress: "地址",}
+    ];
     setData( d => [...d, newRecord] );
     setNumber(number+1);
+  }
+  console.log({days})
+  console.log({data})
+
+  const dataChange = (data, number, address, name) =>{
+    data[number] = {
+      key:number,
+      sceneName: name,
+      sceneAddress: address,
+    }
   }
 
   return (
